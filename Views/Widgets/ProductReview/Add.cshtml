@@ -1,0 +1,46 @@
+﻿@using NB_Commerce.Repositories
+@model NB_Commerce.Model.Models.ProductReview
+@using (Ajax.BeginForm("AddProductReview", "Widgets", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "add-product-review", LoadingElementId = "add-review-loader", OnComplete = "PagedOnComplete_Add" }))
+    {
+        if (ViewBag.Notify != null)
+        {
+            @Html.Raw(ViewBag.Notify)
+        }
+        @Html.HiddenFor(model => model.ProductId)
+        <h3 class="title">Nhận xét của bạn</h3>
+    
+        <div>
+            <label for="Rating">Xếp hạng của bạn về sản phẩm này</label>
+            <input id="Rating" value="@Model.Rating" name="Rating" type="number" min=0 max="@AppConfigs.MaxRate" step=0.5 data-size="xl" data-stars="@AppConfigs.MaxRate" />
+        </div>
+    
+        <div>
+            <label for="Title">Tiêu đề nhận xét</label> @Html.ValidationMessageFor(model => model.Title)
+            <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="" />
+        </div>
+    
+        <div>
+            <label for="ReviewText">Nội dung nhận xét</label>  @Html.ValidationMessageFor(model => model.ReviewText)
+            <textarea id="ReviewText" name="ReviewText" rows="10" cols="10" style="width: 100%;" placeholder="">@Model.ReviewText</textarea>
+        </div>
+    
+        <div>
+
+            <div class="checkbox">
+                <label style="font-weight: normal;">
+                     @Html.EditorFor(model=>model.DisplayedOrders) <span class="ripple"></span><span class="check"></span>Hiển thị thông tin mua hàng trong phần nhận xét
+                </label>
+            </div>
+
+            <p class="pull-right">
+                <button style="float: right;height: 30px;" class="submit" type="submit">
+                    <span id="add-review-loader" style="display:none;font-size: 10px;">
+                        Waiting...
+                    </span>
+                    Gửi nhận xét
+                </button>
+            </p>
+            
+        </div>
+
+    }

@@ -1,0 +1,17 @@
+﻿@using NB_Commerce.Model.Models
+@model List<NB_Commerce.Model.Models.BlogPostTagMapping>
+<!-- start: list-tags -->
+<div class="list-tags">
+    <ul>
+        @foreach (BlogPostTagMapping item in Model)
+        {
+            
+            <li>
+                <a href="@Utils.GetUrlBlogTag(item.BlogTagId)" title="@item.BlogTag.Name" rel="@item.BlogTag.BlogPostTagMappings.Count">
+                    @item.BlogTag.Name
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<!-- end: list-item -->

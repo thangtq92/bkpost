@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Khôi phục mật khẩu";
+}
+@using NB_Commerce.Helpers
+@model NB_Commerce.Models.LocalPasswordModel
+<link href="~/Content/Css/Account/account.css" rel="stylesheet" />
+<style>
+    /* Module Recovery Pass*/
+    .recovery-pass {
+        background: white;
+        margin: 0px 0px 24px 0px;
+        padding: 0px 12px 12px 12px;
+    }
+    .recovery-pass .supply-information {
+    
+    }
+    .recovery-pass .guide-recovery-pass {
+       min-height: 300px;
+    }
+        .recovery-pass input {
+          width: 300px;
+        }
+        .recovery-pass button {
+            float: right;
+            margin-right: 64px;
+        }
+        .recovery-pass .col-left h4 {
+           margin-left: 22px;
+        }
+    .recovery-pass .field-validation-error {
+         margin-left: 56px;
+    }
+</style>
+
+<div class="container">
+    <ol class="nav breadcrumb">
+        <li>
+            <a href="/"><i class="fa fa-home"></i>Trang chủ <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li><a href="#">Tài khoản<i class="fa fa-angle-right"></i></a></li>
+        <li><a href="#">Khôi phục mật khẩu<i class="fa fa-angle-right"></i></a></li>
+    </ol>
+</div>
+<div class="row recovery-pass account">
+    
+    <div class="col-xs-8 supply-information col-left">
+        <h4>Nhập mật khẩu mới</h4>
+        <div>
+             @using (Html.BeginForm("RecoveryPass", "Account", FormMethod.Post))
+        {
+            <input type="hidden" value="_1234_" id="OldPassword" name="OldPassword"/>
+            <input type="hidden" value="@ViewBag.Guid" id="Guid" name="Guid"/>
+            @Html.ValidationSummary(true)
+            @Html.AntiForgeryToken()
+            <div class="control-group">
+                @Html.LabelFor(model => model.NewPassword, new {@class="control-label required" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.NewPassword, new { placeholder = "*****************"}) 
+                    @Html.ValidationMessageFor(model => model.NewPassword)
+                </div>
+            </div>
+                 
+            <div class="control-group">
+                @Html.LabelFor(model => model.ConfirmPassword, new {@class="control-label required" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { placeholder = "*****************"}) 
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+                 
+            <hr/>
+            <p class="pull-right">
+                <button class="text-center" type="submit">Đổi mật khẩu</button>
+            </p>
+        }
+        </div>
+    </div>
+    
+    <div class="col-xs-4 guide-recovery-pass col-right">
+          <h4>Hướng dẫn</h4>
+            <ol>
+                <li>Nhập mật khẩu mới và mật khẩu xác nhận giống nhau</li>
+                <li>Click vào nút [Đổi mật khẩu] để thay đổi</li>
+            </ol>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('html, body').animate({ scrollTop: 472 }, 100);
+        });
+    </script>
+}

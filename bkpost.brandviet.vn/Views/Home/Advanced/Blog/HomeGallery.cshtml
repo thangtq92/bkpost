@@ -1,0 +1,20 @@
+﻿@using NB_Commerce.Models
+@model List<NB_Commerce.Models.GalleryModel>
+@if (Model != null) {
+    <ul class="list-gallery">
+        @foreach (GalleryModel item in Model)
+        {
+            for (int i = 0; i <= item.Sources.Count() - 1; i++)
+            {
+                <!-- start: item inner  -->
+                <li class="item">
+                    <div class="box-images">
+                        <a href="#"><img alt="@(item.Sources[i].Alt ?? "default")" src="@Utils.GetImage(item.Sources[i].Src, 88, 66)"></a>
+                    </div>
+                </li>
+                <!-- end: item inner  -->
+            }
+        }
+    </ul>
+    <!-- end: owl carousel  -->
+}

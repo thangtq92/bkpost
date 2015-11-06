@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Thay đổi mật khẩu";
+}
+@using NB_Commerce.Models
+@model NB_Commerce.Models.LocalPasswordModel
+@Styles.Render("~/bundles/content/default/account/css")
+<style>
+    /* Module Change Pass*/
+    .change-pass {
+        background: white;
+        margin: 0px 0px 24px 0px;
+        padding: 0px 12px 12px 12px;
+    }
+    .change-pass .supply-information {
+    
+    }
+    .change-pass .guide-change-pass {
+       min-height: 300px;
+    }
+        .change-pass input {
+          width: 300px;
+        }
+        .change-pass button {
+            float: right;
+            margin-right: 64px;
+        }
+        .change-pass .col-left h4 {
+           margin-left: 22px;
+        }
+    .change-pass .field-validation-error {
+         margin-left: 56px;
+    }
+</style>
+
+@Html.Action("Breadcrumb", "Widgets", new {breadcrumbs = new List<BreadcrumbModel> {new BreadcrumbModel {Link = "#", Title = "Thay đổi mật khẩu"}}, homeIncluded = true, area = ""})
+
+<div class="row change-pass account">
+    
+    <div class="col-xs-8 supply-information col-left">
+        <h4>Cung cấp thông tin mật khẩu</h4>
+        <div>
+             @using (Html.BeginForm("ChangePass", "Account", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+           
+            <div class="control-group">
+                @Html.LabelFor(model => model.OldPassword, new {@class="control-label required" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.OldPassword, new { placeholder = "**************"}) 
+                    @Html.ValidationMessageFor(model => model.OldPassword)
+                </div>
+            </div>
+                 
+            <div class="control-group">
+                @Html.LabelFor(model => model.NewPassword, new {@class="control-label required" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.NewPassword, new { placeholder = "*****************"}) 
+                    @Html.ValidationMessageFor(model => model.NewPassword)
+                </div>
+            </div>
+                 
+            <div class="control-group">
+                @Html.LabelFor(model => model.ConfirmPassword, new {@class="control-label required" })
+                <div class="controls">
+                    @Html.PasswordFor(model => model.ConfirmPassword, new { placeholder = "*****************"}) 
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                </div>
+            </div>
+                 
+            
+            <hr/>
+            <p class="pull-right">
+                <button class="text-center" type="submit">Đổi mật khẩu</button>
+            </p>
+        }
+        </div>
+    </div>
+    
+    <div class="col-xs-4 guide-change-pass col-right">
+          <h4>Hướng dẫn</h4>
+            <ol>
+                <li>Nhập mật khẩu cũ</li>
+                <li>Nhập mật khẩu mới và mật khẩu xác nhận giống nhau</li>
+                <li>Click vào nút [Đổi mật khẩu] để thay đổi</li>
+            </ol>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('html, body').animate({ scrollTop: 472 }, 100);
+        });
+    </script>
+}

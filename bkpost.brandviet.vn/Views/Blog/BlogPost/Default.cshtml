@@ -1,0 +1,374 @@
+﻿@using NB_Commerce.Model.Models
+@model NB_Commerce.Model.Models.BlogPost
+@{
+    ViewBag.Title = Model.MetaTitle ?? Model.Title;
+    ViewBag.MetaKeywords = Model.MetaKeywords;
+    ViewBag.MetaDescription = Model.MetaDescription ?? Model.Excerpt;
+
+    string categoryIds = Model.BlogPostCategoryMappings.OrderByDescending(e => e.DisplayOrder).Aggregate("", (current, itemSame) => current + itemSame.BlogCategoryId + ",");
+    var blogPostCategoryMapping = Model.BlogPostCategoryMappings;
+    var blogCategory = blogPostCategoryMapping.Any() ? blogPostCategoryMapping.First().BlogCategory : new BlogCategory() { Id = 1, Name = "UnCategory"};
+    List<BlogPost> listBlogRelated = Utils.GetPostByIds(Model.RelatedPost, 10);
+}
+@section styles {
+    @Styles.Render("~/bundles/content/plugins/owlcarousel/css", "~/bundles/content/default/page/css", "~/bundles/content/default/blog/blog-post/css", "~/bundles/content/default/page-detail/css")
+}
+<!-- MAIN CONTENT -->
+@*@Html.Action("Caller", "StaticBlock", new { identifier = "banner-top-page", area = "" })*@
+<!-- start: layout-page-wrap -->
+<div class="layout-page-wrap layout-page-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-push-3">
+                <!-- start: content-page-layout-->
+                <div class="content-page-layout">
+                    <!--start: box-breadcrumb-->
+                    @Html.Action("Breadcrumb", "Widgets", new { breadcrumbs = new List<BreadcrumbModel> { new BreadcrumbModel() { Link = Utils.GetUrlBlogCategory(blogCategory.Id), Title = blogCategory.Name }, new BreadcrumbModel { Link = "#", Title = Model.Title } }, homeIncluded = true, area = "" })
+                    <!--end: box-breadcrumb-->
+                    <!--start: content-page-inner-->
+                    <div class="content-page-inner">
+                        <!--start: post-header-->
+                        <div class="post-header">
+                            <header class="post-title">
+                                <h1 class="entry-title">@Model.Title</h1>
+                                <div class="module-meta-info">
+                                    <div class="post-author-name">By <a itemprop="author" href="http://demo.tagdiv.com/newspaper/author/admin/">Admin</a></div>
+                                    <div class="post-date">
+                                        Ngày đăng: <time datetime="@Model.PublishedTime">@Model.PublishedTime</time>
+                                    </div>
+                                    <div class="post-comments-views">
+                                        <span><i class="fa fa-eye"></i>@Model.Viewed</span>
+                                        <span><a href="#"><i class="fa fa-comment-o"></i>@Model.CommentCount</a></span>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="post-description">
+                                <p>@Html.Raw(Model.Excerpt)</p>
+                            </div>
+                            <ul class="post-link-relates">
+                                @foreach (BlogPost itemrelated in listBlogRelated)
+                                {
+                                    <li class="item">
+                                        <h3>
+                                            <a title="@itemrelated.Title" href="@Utils.GetUrlBlogPost(itemrelated.Id)">
+                                                @itemrelated.Title
+                                            </a>
+                                        </h3>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!--end: post-header-->
+                        <!--start: post-content-->
+                        <div class="post-content">
+                            @Html.Raw(Model.Content)
+                        </div>
+                        <!--end: post-content-->
+                        <!-- start: news-tags -->
+                        <div class="news-detail-tags">
+                            <div class="tags-title"><i class="fa fa-tags" title="Chủ đề liên quan"></i><span>Tags:</span></div>
+                            <div class="tags-link">
+                                <ul>
+                                    @foreach (BlogPostTagMapping itemTag in Model.BlogPostTagMappings)
+                                    {
+                                        <li>
+                                            <h3>
+                                                <a class="tags transition" title="@itemTag.BlogTag.Name" href="@Utils.GetUrlBlogTag(itemTag.BlogTagId)">
+                                                    @itemTag.BlogTag.Name
+                                                </a>
+                                            </h3>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end: news-tags -->
+                        <!-- start: box-comment -->
+                        <div id="comment" class="comment-wrapper"></div>
+                        <!-- end: box-comment -->
+                        <!-- start: layout-slider-relate -->
+                        <div class="layout-slider-relate">
+                            <!-- start: block-title -->
+                            <div class="block-title">
+                                <h3 class="heading">
+                                    <a href="@Utils.GetUrlBlogCategory(blogCategory.Id)">Bài cùng chuyên mục</a>
+                                </h3>
+                            </div>
+                            <!-- end: block-title -->
+                            <!-- start: block-content -->
+                            <div class="box-content">
+                                <!-- start: activities-slider -->
+                                @{
+                                    List<BlogPostCategoryMapping> listBlogPostSame = Utils.GetPostByCategoryIds(categoryIds, Model.Id, take: 8);
+                                    var listBlogRendered = new List<int>();
+                                }
+                                <div id="news-relate-category-slider" class="owl-carousel">
+                                    @foreach (BlogPostCategoryMapping itemSame in listBlogPostSame.Where(e => e.BlogPost.Status == BlogPostStatus.Published && e.BlogPost.StoreAppliedIds.Contains(SessionManager.StoreAppliedId)))
+                                    {
+                                        if (listBlogRendered.All(e => e != itemSame.BlogPostId))
+                                        {
+
+                                            <!-- start: item -->
+                                            <div class="item">
+                                                <div class="box-images">
+                                                    <h3>
+                                                        <a title="@itemSame.BlogPost.Title" href="@Utils.GetUrlBlogPost(itemSame.BlogPostId)"><img src="@Utils.GetImage(itemSame.BlogPost.Avatar, 170, 128)" alt="@itemSame.BlogPost.Title"></a>
+                                                    </h3>
+                                                </div>
+                                                <!-- start: box-info-->
+                                                <div class="box-info">
+                                                    <h2 class="title">
+                                                        <a href="@Utils.GetUrlBlogPost(itemSame.BlogPostId)">@itemSame.BlogPost.Title</a>
+                                                    </h2>
+                                                </div>
+                                                <!-- end: box-info-->
+                                            </div>
+                                            <!-- end: item -->
+                                            listBlogRendered.Add(itemSame.BlogPostId);
+                                        }
+                                    }
+                                </div>
+                                <!-- end: activities-slider -->
+                            </div>
+                            <!-- end: block-content -->
+                        </div>
+                        <!-- end: layout-slider-relate -->
+                    </div>
+                    <!--end: content-page-inner-->
+                </div>
+                <!-- end: content-page-layout-->
+            </div>
+            <div class="col-xs-12 col-sm-3 col-sm-pull-6">
+                <!-- start: left-page-layout-->
+                <div class="left-page-layout">
+                    <!-- start: menu-sidebar-->
+                    <div class="menu-sidebar">
+                        <div class="head-box-title">
+                            <h3>Tin tức và sự kiện</h3>
+                        </div>
+                        <!-- start: list-links -->
+                        <div class="box-content list-links">
+                            <ul>
+                                @foreach ( BlogPostCategoryMapping itemCate in Model.BlogPostCategoryMappings)
+                                {
+                                    <li>
+                                        <h3>
+                                            <a href="@Utils.GetUrlBlogCategory(itemCate.BlogCategoryId)">@itemCate.BlogCategory.Name</a>
+                                        </h3>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end: menu-sidebar-->
+                    <!-- hotline-banner-adv-sidebar -->
+                    @Html.Action("Caller", "StaticBlock", new { identifier = "sidebar-hotline-adv", area = "" })
+                </div>
+                <!-- end: left-page-layout-->
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <!-- start: right-page-layout-->
+                <div class="right-page-layout">
+                    <!-- start: inner-box-sidebar most view-->
+                    <div class="inner-box-sidebar">
+                        <div class="head-box-title">
+                            <h3>Xem nhiều nhất</h3>
+                        </div>
+                        @Html.Action("MostviewedPosts", "Widgets", new { blogCategoryId = blogCategory.Id, take = 5, area = "" })
+                    </div>
+                    <!-- end: inner-box-sidebar most view-->
+                    <!-- start: inner-box-sidebar most view-->
+                    <div class="inner-box-sidebar">
+                        <div class="head-box-title">
+                            <h3>Chủ đề phổ biến</h3>
+                        </div>
+                        @Html.Action("PopularTags", "Widgets", new { blogCategoryId = blogCategory.Id, area = "" })
+                    </div>
+                    <!-- end: inner-box-sidebar most view-->
+                    <!-- start: inner-box-sidebar.style-line lastest news-->
+                    <div class="inner-box-sidebar style-line">
+                        <div class="head-box-title">
+                            <h3>Bài viêt mới nhất</h3>
+                        </div>
+                        @Html.Action("MostviewedPosts", "Widgets", new { blogCategoryId = blogCategory.Id, take = 5, area = "" })
+                    </div>
+                    <!-- end: inner-box-sidebar.style-line lastest news-->
+                </div>
+                <!-- end: right-page-layout-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: layout-page-wrap -->
+@section scripts {
+    
+    <script src="~/Content/plugins/owlcarousel/js/owl.carousel.min.js"></script>
+    @Scripts.Render( "~/bundles/content/default/blog/blog-category/js", "~/bundles/content/default/blog/blog-post/js")
+    <script src="~/Scripts/knockout-latest.js"> </script>
+    <script src="~/Scripts/jquery.timeago.js"> </script>
+    <script>
+        $(".time-ago").timeago();
+        
+        var currentLink = $($("a[href='@Utils.GetUrlBlogCategory(blogCategory.Id)']:first"));
+        if (currentLink != null) {
+            currentLink.addClass('active');
+            currentLink.parent().addClass('active');
+            currentLink.parent().parent().parent().addClass('active');
+        }
+
+        /* embed comment */
+        HvComment = {
+            BlogPostId: '@Model.Id',
+            Take: 10, Skip: 0,
+            DatasCollection: [],
+            Language: {
+                Comment: '@Resources.Resource.Comment_Text',
+                SendComment: "Gửi bình luận",
+                Reply: "Trả lời",
+                Like: "Thích",
+                DisLike: "Không thích",
+                Abuse: "Báo vi phạm",
+                Abused: "Đã báo vi phạm",
+                Send: '@Resources.Resource.Button_Search_Name',
+                Cancel: "Hủy",
+                ViewMore: "Xem thêm",
+                ValidComment: "Nội dung bình luận không được phép trống!",
+                ProfileTitle: "Thông tin của bạn",
+                FullNameRequired: "Tên đăng nhập yêu cầu!",
+                EmailRequired: "Địa chỉ mail yêu cầu!",
+                EmailIsValid: "Địa chỉ email không hợp lệ!",
+                NotifySuccessfully: "Cảm ơn bạn đã gửi bình luận, bình luận của bạn sẽ được phê duyệt trong thời gian sớm nhất!",
+                FullNamePlaceholder: "Họ tên (Hiển thị trên trang)",
+                EmailPlaceholder: "Email (Không hiển thị trên trang)",
+                Submit: "Hoàn tất",
+                Earse: "Xóa"
+            }
+        };
+        if (AppConfigs.isAuthenticated == "True") {
+            HvComment.Credits = {
+                FullName: '@User.Identity.Name', Email: '@Session["Email"]'
+            };
+        }
+        HvComment.Start = function () {
+            HVGetFiles.Htm("/gadgets/comment/index.htm", function (innerHtml) {
+                $("#comment").html(innerHtml);
+            } );
+        };
+        HvComment.Start();
+    </script>
+    <script>iFrameResize({ log: false, bodyMargin: "0px 0px 20px 0px" })</script>
+}
+
+
+
+@*<div class="category-news">
+    <div class="container">
+        <div class="row">
+            <!-- start: PAGE CONTENT LEFT -->
+            <div class="col-sm-8 page-content-left">
+                <!--start: page-title -->
+                <div class="page-title">
+                    <h3>@blogCategory.Name</h3>
+                </div>
+                <!--end: page-title -->
+                <!-- start: detail-news-contents -->
+                <div class="detail-news-contents">
+                    <!-- start: news-detail-title -->
+                    <div class="news-detail-title">
+                        <h1>@Model.Title</h1>
+                        <time class="time-ago" datetime="@Model.PublishedTime"></time>
+                    </div>
+                    <!-- end: news-detail-title -->
+                    <!-- start: news-detail-description -->
+                    <div class="news-detail-description">
+                        <h2>@Html.Raw(Model.Excerpt)</h2>
+                    </div>
+                    <!-- end: news-detail-description -->
+                    <!-- start: news-relates -->
+                    <ul class="news-relates">
+                        @foreach (BlogPost itemrelated in listBlogRelated)
+                        {
+                            <li>
+                                <h3>
+                                    <a title="@itemrelated.Title" href="@Utils.GetUrlBlogPost(itemrelated.Id)">
+                                        @itemrelated.Title
+                                    </a>
+                                </h3>
+                            </li>
+                        }
+                    </ul>
+                    <!-- end: news-relates -->
+                    <!-- start: news-detail-main -->
+                    <div class="news-detail-main">
+                        @Html.Raw(Model.Content)
+                    </div>
+                    <!-- end: news-detail-main -->
+
+                </div>
+
+            </div>
+            <!-- end: PAGE CONTENT LEFT -->
+            <!-- start: PAGE CONTENT RIGHT -->
+            <!-- start: PAGE CONTENT RIGHT -->
+            <div class="col-sm-4 page-content-right">
+                <!-- start: banner-hotline -->
+                @Html.Action("Caller", "StaticBlock", new { identifier = "banner-right-page", area = "" })
+                <!-- end: banner-hotline -->
+                <!-- start: side-box-wrapper box-service-us -->
+                @if (Model.BlogPostProductMappings.Any())
+                {
+                    <div class="side-box-wrapper box-service-us">
+                        <div class="box-title">
+                            <h3>Dịch vụ liên quan</h3>
+                        </div>
+                        <ul class="wrapper-list-items">
+                            @foreach (BlogPostProductMapping item in Model.BlogPostProductMappings.Where(e => e.Product.IsActive && e.Product.StoreAppliedIds.Contains(SessionManager.StoreAppliedId)))
+                            {
+                                <li class="items">
+                                    <figure class="box-images overlay">
+                                        <a href="@Utils.GetUrlProduct(item.ProductId)" title="@item.Product.Name"><img src="@Utils.GetImage(item.Product.Picture.Url, 181, 136)" alt="@item.Product.Name"></a>
+                                        <!-- start: MORE -->
+                                        <div class="more">
+                                            <a href="@Utils.GetUrlProduct(item.ProductId)" title="@item.Product.Name"><i class="fa fa-paper-plane"></i></a>
+                                        </div>
+                                        <!-- end: MORE -->
+                                        <div class="content-info">
+                                            <h2 class="title"><a href="@Utils.GetUrlProduct(item.ProductId)">@item.Product.Name</a></h2>
+                                        </div>
+                                    </figure>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+                <!-- end: side-box-wrapper box-service-us -->
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper">
+                    <div class="box-title">
+                        <h3>Bài viết mới nhất</h3>
+                    </div>
+                    @Html.Action("LatestPosts", "Widgets", new { blogCategoryId = blogCategory.Id, take = 3, area = "" })
+                </div>
+                <!-- end: side-box-wrapper -->
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper box-tags">
+                    <div class="box-title">
+                        <h3>Chủ đề phổ biến</h3>
+                    </div>
+                    @Html.Action("PopularTags", "Widgets", new { blogCategoryId = blogCategory.Id, area = "" })
+
+                </div>
+                <!-- end: side-box-wrapper -->
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper">
+                    <div class="box-title">
+                        <h3>Xem nhiều nhất</h3>
+                    </div>
+                    @Html.Action("MostviewedPosts", "Widgets", new { blogCategoryId = blogCategory.Id, take = 3, area = "" })
+                </div>
+                <!-- end: side-box-wrapper -->
+            </div>
+            <!-- end: PAGE CONTENT RIGHT -->
+        </div>
+    </div>
+</div>*@

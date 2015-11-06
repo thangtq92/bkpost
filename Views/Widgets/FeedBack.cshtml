@@ -1,0 +1,30 @@
+﻿@model NB_Commerce.Models.FeedBack
+@using (Ajax.BeginForm("FeedBack", "Widgets", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "add-feedback", LoadingElementId = "add-feedback-loader", OnComplete = "PagedFeedBackLoaded" }))
+{
+    if(ViewBag.Notify != null) {
+       @Html.Raw(ViewBag.Notify)
+    }
+    <div>
+        <label for="FullName">Họ và tên</label>
+        <input type="text" name="FullName" value="@Model.FullName"  placeholder="Nhập Họ và tên" />
+        @Html.ValidationMessageFor(model => model.FullName)
+    </div>
+    <div>
+        <label for="Email">Địa chỉ email</label>
+        <input type="email" name="Email" value="@Model.Email"  placeholder="Nhập email" />
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+    <div>
+        <label for="Phone">Số điện thoại</label>
+        <input type="text" name="Phone" value="@Model.Phone"  placeholder="Nhập số điện thoại" />
+        @Html.ValidationMessageFor(model => model.Phone)
+    </div>
+    <div>
+        <textarea rows="5" name="Messages">@Model.Message</textarea>
+    </div>
+     <button style="float: right;" class="submit" type="submit"><s></s>
+        <span id="add-feedback-loader" style="display:none;font-weight:bold">
+             Wait...
+        </span>
+        Gửi</button>
+}

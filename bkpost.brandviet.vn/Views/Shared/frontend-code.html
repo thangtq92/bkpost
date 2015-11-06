@@ -1,0 +1,233 @@
+﻿<!-- start: main-page-wrap -->
+<div class="main-page-wrap">
+    <!-- start: index-page-wrap -->
+    <div class="index-page-wrap">
+        <!-- start: promotions-wrap -->
+        <div class="promotions-wrap">
+            <div class="container">
+                <div class="hight-light"><a class="title" href="#">Khuyến mại</a> 
+                @Html.Action("LatestPosts", "Widgets", new { grouped = "home-latest-posts", take = 6, pathView = "Blog/LatestPostsIndex", area = "" })</div>
+
+                <div class="times-now"><time class="time">Chủ nhật, ngày 19-07-2015</time></div>
+            </div>
+        </div>
+    </div>
+    <!-- end: promotions-wrap --><!-- start: main-slider-wrap -->
+
+    <div class="main-slider-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8"><!-- start: main-slider -->@{ Html.RenderAction("Album", "Widgets", new { identifier = "home-slider-sequence", area = "" }); } <!-- end: main-slider --></div>
+
+                <div class="col-sm-4">
+                    <!-- start: news-hightlight -->
+                    <div class="news-hightlight">
+                        <div class="head-box-title">
+                            <h3>Tin tức nổi bật</h3>
+                        </div>
+                        <!-- end: head-box-title --><!-- start: head-box-content -->
+
+                        <div class="head-box-content">
+                            <div class="news-top">
+                                <figure class="box-images"><a href="#"><img alt="Lễ quay số trúng thưởng, Chương trình : “Gửi nhiều trúng lớn dịch vụ chuyển” " src="img/page/image-1-170x128.jpg" /></a></figure>
+
+                                <div class="box-info">
+                                    <h2 class="title"><a href="#">Lễ quay số trúng thưởng, Chương trình : “Gửi nhiều trúng lớn dịch vụ chuyển ...”</a></h2>
+
+                                    <p class="description">Chương trình khuyến mại “Gửi nhiều trúng lớn với chuyển phát nhanh EMS và Bưu kiện” diễn ra từ ngày ...</p>
+                                    <time class="time">2015-08-18</time>
+                                </div>
+                            </div>
+
+                            <ul class="list-items">
+                                <li>
+                                    <h3><a href="#">Chuyển tiền nhanh - Trúng thưởng lớn</a> <time class="time">2015-08-18</time></h3>
+                                </li>
+                                <li>
+                                    <h3><a href="#">Bưu điện Việt Nam và nhà xuất bản Giáo dục</a> <time class="time">2015-08-18</time></h3>
+                                </li>
+                                <li>
+                                    <h3><a href="#">Đã tìm thấy chủ nhân chiếc xe Toyota Yaris trong chương trình khuyến mại “Xuân mới, Lộc tới nhà” </a> <time class="time">2015-08-18</time></h3>
+                                </li>
+                                <li>
+                                    <h3><a href="#">Trúng xe Vespa LX 125cc khi mua bảo hiểm ôtô của PTI</a> <time class="time">2015-08-18</time></h3>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- end: head-box-content -->
+                    </div>
+                    <!-- end: news-hightlight -->
+
+                    <div class="hot-line-phone">
+                        <h3>02813.811.911</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: main-slider-wrap --><!-- start: services-wrap -->
+
+    <div class="services-wrap">
+        <div class="container">
+            <div class="box-title">
+                <h2 class="head-title"><a href="#">Dịch vụ</a></h2>
+            </div>
+            <!-- start: box-content -->
+
+            <div class="box-content">@Html.Action("Home", "AdvancedCatalog", new {get = "category", pathView ="CategoryFeatured" })</div>
+            <!-- end: box-content -->
+        </div>
+    </div>
+    <!-- end: services-wrap -->
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    <!-- start: news-wrap -->
+                    <div class="news-wrap">
+                        <!-- start: block-title -->
+                        <div class="block-title">
+                            <h3 class="heading"><a href="#">Tin tức</a></h3>
+                            <!-- start: sub-title-link -->
+
+                            <ul class="sub-title-link">
+                                <li>
+                                    <h3><a href="#">Tin hoạt động</a></h3>
+                                </li>
+                                <li>
+                                    <h3><a href="#">Tin bưu chính</a></h3>
+                                </li>
+                                <li>
+                                    <h3><a href="#">Tin khuyến mại</a></h3>
+                                </li>
+                            </ul>
+                            <!-- end: sub-title-link -->
+                        </div>
+                        <!-- end: block-title --><!-- start: block-content -->
+
+                        <div class="box-content">
+                            <!-- start: hight-light -->
+                            <div class="hight-light">
+                                <div class="box-images">
+                                    <h3><a href="#"><img alt="show alt" src="img/page/news-1-315x235.jpg" /></a></h3>
+                                </div>
+                                <!-- start: box-info-->
+
+                                <div class="box-info">
+                                    <h2 class="title"><a href="#">Kỷ niệm 70 năm truyền thống ngành bưu điện(15/08/1945 - 15/8/2015)</a></h2>
+
+                                    <p class="description">Tối 18/3/2015, tại Trung tâm Văn hoá tỉnh, UBND tỉnh Bắc Kan đã phối hợp với Liên đoàn Lao động tỉnh đã long trọng tổ chức Lễ tôn vinh “doanh nghiệp...</p>
+                                </div>
+                                <!-- end: box-info-->
+                            </div>
+                            <!-- end: hight-light --><!-- start: list-item -->
+
+                            <div class="list-items">
+                                <!-- start: item -->
+                                <div class="item">
+                                    <div class="box-images">
+                                        <h3><a href="#"><img alt="show alt" src="img/page/news-2-80x60.jpg" /></a></h3>
+                                    </div>
+                                    <!-- start: box-info-->
+
+                                    <div class="box-info">
+                                        <h2 class="title"><a href="#">Lễ quay số trúng thưởng, Chương trình : “Gửi nhiều trúng lớn dịch vụ chuyển ...”</a></h2>
+                                        <time class="time"><i class="fa fa-clock-o"></i>2015-08-18</time>
+                                    </div>
+                                    <!-- end: box-info-->
+                                </div>
+                                <!-- end: item --><!-- start: item -->
+
+                                <div class="item">
+                                    <div class="box-images">
+                                        <h3><a href="#"><img alt="show alt" src="img/page/news-3-80x60.jpg" /></a></h3>
+                                    </div>
+                                    <!-- start: box-info-->
+
+                                    <div class="box-info">
+                                        <h2 class="title"><a href="#">Không gian làm việc của cán bộ bưu điện tỉnh Bắc Kan hiện đại tiên tiến bậc nhất khu vục miền...</a></h2>
+                                        <time class="time"><i class="fa fa-clock-o"></i>2015-08-18</time>
+                                    </div>
+                                    <!-- end: box-info-->
+                                </div>
+                                <!-- end: item --><!-- start: item -->
+
+                                <div class="item">
+                                    <div class="box-images">
+                                        <h3><a href="#"><img alt="show alt" src="img/page/news-4-80x60.jpg" /></a></h3>
+                                    </div>
+                                    <!-- start: box-info-->
+
+                                    <div class="box-info">
+                                        <h2 class="title"><a href="#">Mẫu tem “Chào mừng Cộng đồng ASEAN” sẽ được phát hành vào ngày 8/8</a></h2>
+                                        <time class="time"><i class="fa fa-clock-o"></i>2015-08-18</time>
+                                    </div>
+                                    <!-- end: box-info-->
+                                </div>
+                                <!-- end: item --><!-- start: item -->
+
+                                <div class="item">
+                                    <div class="box-images">
+                                        <h3><a href="#"><img alt="show alt" src="img/page/news-5-80x60.jpg" /></a></h3>
+                                    </div>
+                                    <!-- start: box-info-->
+
+                                    <div class="box-info">
+                                        <h2 class="title"><a href="#">Lễ quay số trúng thưởng, Chương trình : “Gửi nhiều trúng lớn dịch vụ chuyển ...”</a></h2>
+                                        <time class="time"><i class="fa fa-clock-o"></i>2015-08-18</time>
+                                    </div>
+                                    <!-- end: box-info-->
+                                </div>
+                                <!-- end: item --><!-- start: item -->
+
+                                <div class="item">
+                                    <div class="box-images">
+                                        <h3><a href="#"><img alt="show alt" src="img/page/news-2-80x60.jpg" /></a></h3>
+                                    </div>
+                                    <!-- start: box-info-->
+
+                                    <div class="box-info">
+                                        <h2 class="title"><a href="#">Không gian làm việc của cán bộ bưu điện tỉnh Bắc Kan hiện đại tiên tiến bậc nhất khu vục miền...</a></h2>
+                                        <time class="time"><i class="fa fa-clock-o"></i>2015-08-18</time>
+                                    </div>
+                                    <!-- end: box-info-->
+                                </div>
+                                <!-- end: item -->
+                            </div>
+                            <!-- end: list-item -->
+                        </div>
+                        <!-- end: block-content -->
+                    </div>
+                    <!-- end: news-wrap --><!-- start: activities-wrap -->
+
+                    <div class="activities-wrap">
+                        <!-- start: block-title -->
+                        <div class="block-title">
+                            <h3 class="heading"><a href="#">Hoạt động xã hội</a></h3>
+                        </div>
+                        <!-- end: block-title --><!-- start: block-content -->
+
+                        <div class="box-content">
+                            @Html.Action("LatestPosts", "Widgets", new { grouped = "activities-posts-index", take = 6, pathView = "Blog/ActivitiesPostsIndex", area = "" })
+                        </div>
+                        <!-- end: block-content -->
+                    </div>
+                    <!-- end: activities-wrap -->
+                </div>
+
+                <div class="col-xs-12 col-sm-4">
+                    <!-- start: banner-adv -->
+                    <div class="banner-adv">
+                        <div class="title">- Liên hệ quảng cáo -</div>
+
+                        <div class="box-images"><!--Banner Call Center-->@Html.Action("Caller", "StaticBlock", new { identifier = "banner-right-page", area = "" })</div>
+                    </div>
+                    <!-- end: banner-adv --><!-- start: customers-wrap --><!-- start: CUSTOMER  -->@Html.Action("Caller", "StaticBlock", new { identifier = "clients-partners", area = "" }) <!-- end: CUSTOMER -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: index-page-wrap --><!-- end: main-page-wrap -->@Styles.RenderFormat(BundlesFormats.ALL, "~/bundles/content/default/home/css") @*JS FOR INDEX PAGE*@ @section scripts {
+<script src="~/Content/default/home/js/3-owlcarousel/js/owl.carousel.min.js"></script> @Scripts.Render("~/bundles/content/default/home/js/4-main")}

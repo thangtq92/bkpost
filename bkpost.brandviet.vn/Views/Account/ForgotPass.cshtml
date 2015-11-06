@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Lấy lại mật khẩu";
+}
+@using NB_Commerce.Models
+@model NB_Commerce.Models.ForgetPassModel
+@Styles.Render("~/bundles/content/default/account/css");
+<style>
+    /* Module ForgetPass*/
+    .forget-pass {
+        background: white;
+        margin: 0px 0px 24px 0px;
+        padding: 0px 12px 12px 12px;
+    }
+    .forget-pass .supply-email {
+    
+    }
+    .forget-pass .guide-get-pass {
+       min-height: 200px;
+    }
+        .forget-pass input {
+          width: 300px;
+        }
+        .forget-pass button {
+            float: right;
+            margin-right: 64px;
+        }
+        .forget-pass .col-left h4 {
+           margin-left: 45px;
+        }
+    .forget-pass .field-validation-error {
+         margin-left: 56px;
+    }
+</style>
+
+@Html.Action("Breadcrumb", "Widgets", new {breadcrumbs = new List<BreadcrumbModel> {new BreadcrumbModel {Link = "#", Title = "Lấy lại mật khẩu"}}, homeIncluded = true, area = ""})
+
+<div class="row forget-pass account">
+    
+    <div class="col-xs-8 supply-email col-left">
+        <h4>Cung cấp địa chỉ email</h4>
+        <div>
+             @using (Html.BeginForm("ForgotPass", "Account", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+           
+            <div class="control-group">
+                @Html.LabelFor(model => model.Email, new {@class="control-label required" })
+                <div class="controls">
+                     @Html.TextBoxFor(model => model.Email, null, new { placeholder = "emaicuaban@xyz.com", type="email" }) <button class="text-center" type="submit">Gửi mật khẩu</button>
+                     @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            
+        }
+        </div>
+    </div>
+    
+    <div class="col-xs-4 guide-get-pass col-right">
+          <h4>Hướng dẫn</h4>
+            <ol>
+                <li>Vào check email</li>
+                <li>Click vào link hệ thống gửi cho bạn</li>
+                <li>Làm theo yêu cầu</li>
+            </ol>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('html, body').animate({ scrollTop: 472 }, 500);
+        });
+    </script>
+}

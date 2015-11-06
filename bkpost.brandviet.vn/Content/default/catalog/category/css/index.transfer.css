@@ -1,0 +1,144 @@
+﻿/*This is page Service pages*/
+
+.service-pages-wrapper {}
+.service-pages-wrapper .service-tabs {border: 0; margin-bottom: 20px;}
+.service-pages-wrapper .service-tabs>li>a{color: #444; font-size: 13px; text-transform: uppercase; background-color: #ebebeb;border-radius: 3px;    padding: 10px 23px;}
+.service-pages-wrapper .service-tabs>li.active>a, .service-pages-wrapper .service-tabs>li:hover>a {background-color: #0071c7; color: #fff;}
+
+.service-tabs-content {}
+.inner-content h3.title{color: #1f5588; font-weight: 700; font-size: 16px; margin-bottom: 10px;}
+.inner-content h3.title a {font-size: 13px;color: gray;float: right; }
+.news-relates {padding-left: 15px;margin: 10px 0;}
+.news-relates li {list-style-type: disc;}
+.news-relates li h2 {line-height: 16px;}
+.news-relates li a{font-size: 13px; font-weight: 500; color: #444;font-style: italic;}
+.news-relates li a:hover {color: #0071c7}
+
+/*ADV PLACEMENT*/
+.adv-placement-wrapper {}
+.adv-place-info {margin: 20px 0 30px 0;padding-bottom: 20px; border-bottom: 1px solid #ccc;}
+.adv-place-info li {margin-bottom: 5px;}
+.adv-place-info li h2 {font-size: 16px; color: #444; font-weight: 400;}
+.adv-place-info li h2 a { font-size: 15px;   font-style: normal; color: #0071C7; }
+.adv-place-info li h2 span {color: #333;font-weight: 500;}
+
+
+/*SHOW CASE*/
+.box-our-gallery nav.primary>ul>li>a {text-transform: uppercase;}
+.box-our-gallery nav.primary>ul>li a.selected, .box-our-gallery nav.primary>ul>li:hover a {background-color: transparent; color: #0071c7}
+.box-our-gallery nav.primary>ul>li a:before, .box-our-gallery nav.primary>ul>li a:after {display: none;}
+.box-our-gallery nav.primary { margin: 0; overflow: hidden;margin-bottom: 10px;}
+.tabs-media li {list-style-type: disc;}
+.tabs-media li:first-child { list-style-color: transparent;}
+.show-case .entry {float: left;margin-bottom: 30px }
+.show-case .entry:hover .figcaption {height: 100%}
+.show-case .item-inner{  width: 100%;position: relative;}
+.show-case .figcaption {position: absolute;width: 100%;height: 0%; bottom: 0; left: 0;background-color: rgba(0,0,0,0.6);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: flex-end;
+  -ms-flex-align: flex-end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+
+.show-case .figcaption .caption-block {width: 100%; background-color: #1e1e1e;padding: 15px;opacity: 0}
+.show-case .item-inner:hover .figcaption .caption-block {opacity: 1}
+.show-case .figcaption .caption-block h3{color: #0071c7; font-size: 16px; font-weight: 700;text-transform: uppercase;margin-bottom: 5px}
+.show-case .figcaption .caption-block p.des{color: #fff; font-size: 13px;}
+.show-case .figcaption .actions{   text-align: center;margin-top: -60px;margin-bottom: 20px;}
+.show-case .figcaption .actions a {display: inline-block; width: 40px; height: 40px;color: #fff; background-color: #0171c7; text-align: center; border-radius: 50%;}
+.show-case .figcaption .actions a .fa {font-size: 15px; line-height: 40px; }
+.show-case .item-inner img {max-width: 100%;}
+.blueimp-gallery>.indicator>li {width: 40px;height: 30px;}
+.blueimp-gallery>.prev, .blueimp-gallery>.next {
+  width: 36px;
+  height: 36px;
+  font-size: 30px;
+  line-height: 32px;
+  border: 2px solid #fff;}
+
+/*LIST ADV PLACEMENT*/
+.fillter-adv-place {background-color: #ebebeb; border-radius: 3px;padding: 7px 10px 0 10px;margin-bottom: 30px;}
+.fillter-adv-place .dropup, .fillter-adv-place .dropdown {display: inline-block;margin:0 30px 7px 0; color: #0066b3;}
+.fillter-adv-place .dropdown .btn{ background-color: #c4c4c4;border-color: #c4c4c4;padding: 3px 10px;color: #0066b3;font-size: 14px;border-radius: 2px;margin-left: 10px;}
+.dropdown-menu>li>a:hover {color: #0066b3;}
+.tag-name {    position: absolute; left: 0;bottom: 0;padding: 5px 10px;background-color: rgba(1, 1,1,.8);}
+.tag-name a {color: #fff;}
+.adv-placde-items {margin-bottom: 30px;}
+.adv-placde-items .box-images {margin-bottom: 10px;}
+.adv-placde-items .box-images img {width: 100%;}
+.adv-place-info-content {}
+.adv-place-title {font-size: 14px;line-height: 18px; color: #444; font-weight: 700;overflow: hidden; text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}
+
+/*DETAIL ADV PLACE*/
+.sp-wrap{margin: 0; width: 100%;max-width: 100%;border: 0;}
+.sp-thumbs {padding: 10px 10px; width: 100%;}
+.sp-thumbs a:link, .sp-thumbs a:visited {width: 60px;height: 45px; margin-right: 10px;}
+
+
+.detail-adv-place-info .title{font-size: 18px; color: #333;font-weight: 700;line-height: 20px;margin-bottom: 15px;}
+.detail-adv-place-info .info-adv {border: 1px solid #d2d2d2; border-width: 1px 0 1px 0; padding: 5px 0;margin-bottom: 15px;}
+.detail-adv-place-info .content-info{padding:10px;background-color: #f5f5f5; margin-bottom: 15px;}
+.detail-adv-place-info .content-info ul>li {margin-bottom: 5px;}
+.detail-adv-place-info .content-info ul>li:last-child {margin-bottom: 0;}
+.detail-adv-place-info .content-info ul>li>span{color: #131313; font-weight: 700; font-size: 13px;margin-right: 5px;}
+
+.detail-adv-place-info .box-actions {text-align: center;}
+.detail-adv-place-info .box-actions a {background-color: #ee3f45; font-size: 20px;text-transform: uppercase; color: #fff;display: inline-block; padding: 5px 15px;border-radius: 2px;}
+.detail-adv-place-info .box-actions a .fa {margin-right: 10px}
+.main-content-adv-place .content-details {border: 1px solid #dedede; padding: 20px;margin-bottom: 30px}
+.main-content-adv-place h3.title-detail{margin: 20px 0;font-size: 18px; color: #444;font-weight: 700;}
+
+.banner-adv-airport {margin-bottom: 30px;}
+
+
+/*page-servies-filter*/
+.page-servies-filter .button-group {margin-bottom: 30px;}
+.page-servies-filter .button-group .button{font-size: 13px; font-weight: 400; color: #444; text-transform: uppercase;padding: 10px 20px; border: 0; outline: 0;margin-bottom: 5px;}
+.page-servies-filter .button-group .button.is-checked {background-color: #0071c7; color: #fff;}
+.page-servies-filter .box-images {margin-bottom: 10px;}
+
+/*page-servies-content */
+.box-widgets-wrapper{border:1px solid #e5e5e5;border-top-width:2px;border-top-color:#0066b3;background-color:#f5f5f5;overflow:hidden;margin-bottom: 30px;}
+.box-widgets-wrapper .box-title h3{background-color:#fff;font-weight:500;font-size:16px;color:#0071c7;text-transform:uppercase;padding:10px 0;text-align:center}
+.widgets-container{padding:20px;position:relative;}
+.widgets-container .sub-info .title{font-size:14px;font-weight:500;margin-top:15px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+.widgets-container .sub-info .title a{color:#333;}
+.box-widgets-wrapper .owl-controls{position:absolute;left:0;top:20px;width:100%;padding:0 20px;}
+.box-widgets-wrapper .owl-controls .owl-prev,.box-widgets-wrapper .owl-controls .owl-next{width:30px;height:30px;text-align:center;line-height:30px;background-color:#0066b3;color:#fff;}
+.box-widgets-wrapper .owl-controls .owl-prev{float:left;margin-left:-60px;}
+.box-widgets-wrapper .owl-controls .owl-next{float:right;margin-right:-60px;}
+.box-widgets-wrapper:hover .owl-controls .owl-prev{float:left;margin-left:0;}
+.box-widgets-wrapper:hover .owl-controls .owl-next{float:right;margin-right:0;}
+.service-hight-light{padding:20px; text-align:center;}
+.service-hight-light .news-info .title{color:#027bd8;font-weight:400;font-size:16px;padding:15px;}
+.service-hight-light .news-info .title:after{content:'';width:80px;height:1px;background-color:#ababab;display:inline-block;}
+.service-hight-light .news-info p{color:#444;}
+
+/*Table ipad*/
+@media (min-width: 992px) and (max-width: 1200px) {
+	.service-pages-wrapper .service-tabs>li>a {font-size: 12px;padding: 5px 10px;}
+
+}
+@media (max-width: 992px){
+    .service-pages-wrapper .nav-tabs>li {margin-bottom: 3px;}
+}
+@media (max-width: 767px){
+    body { overflow-y: scroll!important}
+    .service-pages-wrapper .service-tabs>li>a {border-radius: 2px; padding: 5px 12px;}
+
+    .page-title h3 {
+        font-size: 16px;
+    }
+    .fillter-adv-place .dropup, .fillter-adv-place .dropdown {
+            width: 100%;
+    }
+    .fillter-adv-place .dropdown .btn {
+            margin-left: 0px;
+            width: 100%;
+    }
+}

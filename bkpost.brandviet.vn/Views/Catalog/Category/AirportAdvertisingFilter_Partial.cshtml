@@ -1,0 +1,83 @@
+﻿@using NB_Commerce.Model.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<NB_Commerce.Model.Models.ProductCategoryMapping>
+@{
+    var listFilterOptionViews = ViewBag.ListFilters as List<FilterOptionView> ?? new List<FilterOptionView>();
+}
+<!--start: fillter-adv-place -->
+    
+
+<div class="fillter-adv-place">
+    @foreach (FilterOptionView i in listFilterOptionViews.OrderBy(e => e.DisplayOrder))
+    {
+        <div class="dropdown filter-by">
+            @(i.Id == -1 ? "Sân bay" : @i.Name)
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> <span id="@i.Id" class="selected" data-val="">- Tất cả -</span>
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a  data-parent="@i.Id" data-val="-1" href="#">- Tất cả -</a></li> 
+                @foreach (FilterOptionValueView ij in i.FilterOptionValueViews.OrderByDescending(e=>e.DisplayOrder))
+                {
+                    switch (@i.Flags)
+                    {
+                        case "product::categories":
+                            <li><a href="#" data-parent="@i.Id" data-val="category-@ij.Id" title="Filter by category">&nbsp;&nbsp;@ij.Name.Replace(Resources.Resource.Prefix_AirportAdvertising, "")</a></li>
+                            continue;
+                        case "product::attribute":
+                            <li><a href="#" data-parent="@i.Id" data-val="productattribute-@i.Id-@ij.Id" title="Filter by product Attribute">&nbsp;&nbsp;@ij.Name</a></li>
+                            continue;
+                        case "product::specificationattribute":
+                            <li><a href="#" data-parent="@i.Id" data-val="specificationattribute-@i.Id-@ij.Id" title="Filter by Specification Attribute">&nbsp;&nbsp;@ij.Name</a></li>
+                            continue;   
+                        default:
+                            <li><a href="#">@ij.Name</a></li>
+                            continue;
+                    }
+                }
+                    
+            </ul>
+        </div>
+    }
+</div>
+<!--end: fillter-adv-place -->
+<!--start: list-adv-place -->
+<div  class="list-adv-place">
+    <div class="row">
+        @foreach (ProductCategoryMapping item in Model)
+        {
+            string[] nameComplex = item.Product.Name.Split('[');
+            string name = nameComplex[0];
+            string urlProduct = Utils.GetUrlProduct(item.ProductId);
+            <!--start: adv-placde-items -->
+            <div class="col-xsm-12 col-xs-6 col-md-4 adv-placde-items">
+                <figure class="box-images">
+                    <a href="@urlProduct"><img src="@Utils.GetImage(item.Product.Picture.Url, 243, 146)" alt="@name"></a>
+                    <!-- start: MORE -->
+                    <div class="more">
+                        <a href="@urlProduct" title="@item.Product.Name"><i class="fa fa-paper-plane"></i></a>
+                    </div>
+                    <!-- end: MORE -->
+                    @if (nameComplex.Length > 1)
+                    {
+                        <div class="tag-name">
+                            <a href="#">@nameComplex[1].Replace("]", "")</a>
+                        </div>
+                    }
+                </figure>
+                <!-- start: adv-place-info -->
+                <div class="adv-place-info-content">
+                    <h2><a href="@urlProduct" class="adv-place-title">@name</a></h2>
+                </div>
+                <!-- end: adv-place-info -->
+            </div>
+            <!--end: adv-placde-items -->
+        }
+    </div>   
+    <!--end: list-adv-place --> 
+</div>
+<!--end: row -->
+<section class="paging" style="float: right"> 
+    @Html.PagedListPager(Model, page => Url.Action("Page", "Home", new {sortorder = ViewBag.sortOrder, filterby = ViewBag.filterBy, ViewBag.tags, page}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.OnlyShowFivePagesAtATime, new AjaxOptions {HttpMethod = "GET", UpdateTargetId = "list-product-content", OnComplete = "PagedOnComplete", OnBegin = "PagedOnBegin", InsertionMode = InsertionMode.Replace})) 
+</section>
+<input id="filterBy" type="hidden" value="@ViewBag.filterBy"/>
+<input id="page" type="hidden" value="@Model.PageNumber"/>

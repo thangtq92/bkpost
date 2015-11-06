@@ -1,0 +1,133 @@
+﻿<!-- start: main-slider -->
+@{ Html.RenderAction("Album", "Widgets", new { identifier = "home-slider-sequence", area = "" });} 
+<!-- end: main-slider --> 
+<!-- start: about us --> 
+@Html.Action("Caller", "StaticBlock", new { identifier = "core-value", area = "" }) 
+<!-- end: about us --> 
+<!-- start: service -->
+<section class="wrapper-box service" id="box-service">
+    <div class="container">
+        <div class="head-title">
+            <h3>Dịch vụ</h3>
+            <p class="description">Quảng cáo sân bay quốc tế Nội Bài là một trong 3 vị trí quảng cáo sân bay. Sân bay Nội Bài này là cửa ngõ giao thông quan trọng không chỉ của thủ đô Hà Nội mà còn của cả miền Bắc, với sân bay quốc tế Đà Nẵng - cảng hàng không lớn nhất của miền Trung - Tây Nguyên</p>
+        </div>
+
+        <div class="wrapper-content">@*@Html.Action("Home", "AdvancedCatalog", new {groupOf="design-web,marketing-online,airport-advertising,airport-advertising-noi-bai", get = "category", pathView ="~/Views/Home/Advanced/CategoryFeatured" })8@</div>
+    </div>
+</section>
+<!-- end: service --> <!-- start: SHOW CASE -->
+
+<section class="wrapper-box show-case" id="box-show-case">
+    <div class="container">
+        <div class="head-title">
+            <h3>Show case</h3>
+        </div>
+        @* @Html.Action("Home", "AdvancedCatalog", new {groupOf="airport-advertising", get = "category", pathView = "~/Views/Home/Advanced/ProductShowcase" })*@
+    </div>
+</section>
+<!-- end: SHOW CASE --> <!-- start: BANNER ADV  --> @Html.Action("Caller", "StaticBlock", new { identifier = "banner-ads", area = "" }) <!-- start: BANNER ADV  --><br />
+<br />
+<!-- start: service -->
+<section class="wrapper-box service" id="box-product">
+    <div class="container">
+        <div class="head-title">
+            <h3>Sản phẩm nổi bật</h3>
+
+            <p class="description">Chúng tôi, NextBrand teambuilding, hiểu rõ tầm quan trọng của việc xây dựng một đội ngũ đoàn kết,đây cũng chính là tiêu chí hàng đầu mà NextBrand luôn mong muốn đem đến cho khách hàng chất lượng tốt nhất.</p>
+        </div>
+
+        <div class="wrapper-content">@*@Html.Action("Home", "AdvancedCatalog", new { type = "hight-light", get = "product", take = 4, pathView = "~/Views/Home/Advanced/ProductFeatured" })*@</div>
+    </div>
+</section>
+<!-- end: service --> <!-- start: NEWS  -->
+
+<section class="wrapper-box news" id="box-news">
+    <div class="container">
+        <div class="head-title">
+            <h3>Tin tức</h3>
+        </div>
+
+        <div class="wrapper-content"><!-- start: owl carousel  -->@Html.Action("LatestPosts", "Widgets", new { grouped = "home-latest-posts", take = 6, pathView = "Blog/LatestPostsIndex", area = "" }) <!-- end: owl carousel  --></div>
+    </div>
+</section>
+<!-- end: NEWS --> <!-- start: CUSTOMER  --> @Html.Action("Caller", "StaticBlock", new { identifier = "clients-partners", area = "" }) <!-- end: CUSTOMER --> <!-- start: testimonials  -->
+
+<section class="wrapper-box testimonials " id="box-testimonials">
+    <div class="container">
+        <div class="head-title">
+            <h3>Khách hàng nói về chúng tôi</h3>
+        </div>
+
+        <div class="wrapper-content"><!-- start: owl carousel  -->@Html.Action("TestimonialSpecial", "Widgets", new { type = "latest", take = 8, area = "" }) <!-- end: owl carousel  --></div>
+    </div>
+</section>
+<!-- end: testimonials --> <!-- start: contact us -->
+
+<section class="wrapper-box contact-us" id="box-contact-us">
+    <div class="container">
+        <div class="head-title">
+            <h3>Liên hệ</h3>
+        </div>
+
+        <div class="wrapper-content">
+            <ul class="row">
+                <li class="col-xsm-12 col-xs-6 col-md-6">
+                    <!-- start: item-inner, box info-->
+                    <div class="item-inner box-info">
+                        <ul>
+                            <li>
+                                <div class="bx-icon"><i class="fa fa-home"></i></div>
+
+                                <div class="bx-des">
+                                    <span>Địa Chỉ</span>
+
+                                    <p>Hoàng Mai -Hà Nội</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="bx-icon"><i class="fa fa-envelope"></i></div>
+
+                                <div class="bx-des">
+                                    <span>Email</span>
+
+                                    <p>info@nextbrand.com.vn</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="bx-icon"><i class="fa fa-phone"></i></div>
+
+                                <div class="bx-des">
+                                    <span>Điện Thoại</span>
+
+                                    <p>04 .3456.6368</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="bx-icon"><i class="fa fa-globe"></i></div>
+
+                                <div class="bx-des">
+                                    <span>Website</span>
+
+                                    <p>nextbrand.com.vn</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="bx-icon"><i class="fa fa-fax"></i></div>
+
+                                <div class="bx-des">
+                                    <span>Fax</span>
+
+                                    <p>04 .3456.6368</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- start: item-inner, box info -->
+                </li>
+                <li class="col-xsm-12 col-xs-6 col-md-6"><!-- start: item-inner, box form -->@{ Html.RenderPartial("~/Views/Widgets/FeedBack/_FormPatial.cshtml", new FeedBack() { Type = "contact-us" });} <!-- start: item-inner, box form --></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- end: contact us --> 
+@Styles.RenderFormat(BundlesFormats.ALL, "~/bundles/content/default/home/css") @section scripts{ @Scripts.Render("~/bundles/content/default/home/js") } &lt;

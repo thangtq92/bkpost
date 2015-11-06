@@ -1,0 +1,5 @@
+﻿@using Resources
+@using (Html.BeginForm("NewsLetterSubscription","Widgets", FormMethod.Post)) {
+    <input type="email" id="Email" name="Email" placeholder="@Resource.NewsLetterButton_PlaceHolder" />
+    <button type="submit"> @Resource.NewsLetterButton_Text</button>
+}

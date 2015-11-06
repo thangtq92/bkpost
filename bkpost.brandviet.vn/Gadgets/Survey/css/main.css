@@ -1,0 +1,13 @@
+﻿.survey-wapper{width:100%; display: none}
+.survey-header{border-top:39px solid #eee}
+.survey-header::before{content:"Thăm dò ý kiến";font-size:13px;font-weight:700;margin-left:10px;margin-top:-26px;position:absolute;text-transform:uppercase}
+.survey-wapper ul{font-size:14px;margin:0!important;padding:10px}
+.survey-wapper label.desc,legend.desc{border:none;color:#222;display:block;font-size:95%;font-weight:700;line-height:150%;margin:0;padding:0 0 3px;white-space:normal;width:100%}
+.survey-wapper input.checkbox,input.radio{display:block;height:13px;margin:4px 0 0;padding:0;width:13px}
+.survey-wapper label.choice{color:#222;cursor:pointer;display:block;font-size:100%;line-height:150%;margin:-17px 0 0 23px;padding:0 0 5px;width:88%}
+.survey-wapper form li div span{display:block;float:left;margin:0;width:100%}
+.survey-wapper .box-btt{display:block;font-size:13px;margin:0;overflow:hidden;padding-top:14px;text-align:right;width:94%}
+.survey-wapper .box-btt a{cursor:pointer}
+.survey-wapper .box-btt .btt-vote{background:#505050;border:none;color:#fffefe;cursor:pointer;height:26px;padding:2px 8px;text-align:center}
+.survey-wapper .box-btt .btt-vote:hover{background:#f61}
+.survey-wapper .votes{padding:8px 0}

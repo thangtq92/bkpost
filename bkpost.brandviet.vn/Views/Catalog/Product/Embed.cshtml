@@ -1,0 +1,80 @@
+﻿@using NB_Commerce.Model.Models
+@model NB_Commerce.Model.Models.Product
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    ViewBag.Title = Model.MetaTitle ?? Model.Name;
+    ViewBag.MetaKeywords = Model.MetaKeywords;
+    ViewBag.MetaDescription = Model.MetaDescription;
+    string productName = Model.Name.Replace("[", "").Replace("]", "");
+}
+
+<link href="~/content/plugins/owlcarousel/css/owl.carousel.min.css" rel="stylesheet" />
+<!-- start: ADV PLACEMENT WRAPPER-->
+<div class="adv-placement-wrapper">
+    <!-- start: Slider ADV PLACEMENT ONE-->
+    <div id="carousel-example-generic-one" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        @{ ICollection<ProductPictureMapping> listPics = Model.ProductPictureMappings; }
+        <ol class="carousel-indicators">
+            @for (int ij = 0; ij <= listPics.Count() - 1; ij++)
+            {
+                <li data-target="#carousel-example-generic" data-slide-to="@ij" class="@(ij == 0 ? "active" : "")"></li>
+            }
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            @foreach (ProductPictureMapping picItem in listPics)
+            {
+                <div class="item @(picItem == listPics.First() ? "active" : "")">
+                    <img src="@Utils.GetImage(picItem.Picture.Url, 770, 501)" alt="@picItem.Picture.Title">
+                </div>
+            }
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic-one" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic-one" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <!-- end: Slider ADV PLACEMENT ONE-->
+    <!-- start: local-relates -->
+    <ul class="news-relates adv-place-info">
+        <li>
+            <h2><span>Tên:</span> <a href="@Utils.GetUrlProduct(Model.Id)" title="@Model.Name" target="top">  @productName </a></h2>
+        </li>
+        @foreach (ProductSpecificationAttributeMapping itemSpecial in Model.ProductSpecificationAttributeMappings.Where(e => e.DisplayOrder > -1).OrderByDescending(e => e.DisplayOrder))
+        {
+            <li>
+                <h2><span>@itemSpecial.SpecificationAttributeOption.SpecificationAttribute.Name:</span>  @(itemSpecial.CustomValue ?? itemSpecial.SpecificationAttributeOption.Name)</h2>
+            </li>
+        }
+        <li>
+            <h2><span>Đặc điểm:</span> @Html.Raw(Model.ShortDescription)</h2>
+        </li>
+    </ul>
+    <!-- end: local-relates -->
+</div>
+<!-- end: ADV PLACEMENT WRAPPER-->
+@section styles {
+    @Styles.Render("~/bundles/content/default/page/css", "~/bundles/content/default/catalog/category/css")
+    <style>
+        body {
+             overflow: hidden!important;
+        }
+        .adv-placement-wrapper {
+            width: 100%;
+            padding: 6px;
+        }
+    </style>
+}
+@section scripts {
+    <script src="~/content/shared/js/1-bootstrap/js/bootstrap.js"></script>
+    <script src="~/content/plugins/owlcarousel/js/owl.carousel.js"></script>
+    <script>
+        
+    </script>
+}

@@ -1,0 +1,162 @@
+﻿@using NB_Commerce.Helpers
+<style>
+    .pagination-container { float: right; }
+
+    .rating-xs {
+        float: left;
+        font-size: 16px;
+    }
+
+    .m-list-comment {
+        margin-bottom: 20px;
+        padding: 10px 0;
+    }
+
+    .m-list-comment h3.title {
+        color: #E25831;
+        float: left;
+        font-size: 12px;
+        margin: 0;
+        padding: 10px 0;
+        text-transform: uppercase;
+        width: auto;
+    }
+    .comment-paging {  margin-top: 8px;}
+    .comment-paging ul.pagination { margin: 0; }
+
+    .comment-paging ul.pagination li a {
+        background-color: #B3B3B3;
+        border: none;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+        height: 20px;
+        line-height: 20px;
+        margin-right: 5px;
+        padding: 0;
+        text-align: center;
+        width: 20px !important;
+    }
+
+    .comment-paging ul.pagination li.active a, .comment-paging ul.pagination li:hover a { background-color: #E25831; }
+
+
+    .product-review-list li.item {
+        border-bottom: 1px dotted rgb(232, 219, 219);
+        margin-bottom: 20px;
+    }
+
+    .product-review-list li.item .left { text-align: right; }
+
+    .product-review-list li.item .left img { width: 50px; }
+
+    .product-review-list li.item .left strong {
+        color: #333;
+        display: block;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .product-review-list li.item .left p { margin: 0; }
+
+    .product-review-list li.item .left p.time {
+        color: #333;
+        display: block;
+        font-size: 11px;
+    }
+
+    .product-review-list li.item .left p.from {
+        color: gray;
+        font-size: 11px;
+    }
+
+    .product-review-list li.item .right { padding-left: 20px; }
+
+    .product-review-list li.item .right .rating-container { font-size: 10px; }
+
+    .product-review-list li.item .right h3.title {
+        color: #E25831;
+        float: left;
+        font-size: 12px;
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .product-review-list li.item .right p.content {
+        color: #333;
+        float: left;
+        font-size: 12px;
+        font-style: italic;
+        width: 100%;
+    }
+    .product-review-list time {
+        color: gray;
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .product-review-list .product-purchared {
+        color: gray;float: left;
+    }
+    .product-review-list li.item .right p.pull-right { font-size: 12px; }
+
+    .product-review-list li.item .right p.pull-right span { color: #E25831; }
+
+    .product-review-list li.item .review-helpful { cursor: pointer; }
+</style>
+<div class="col-xs-12 m-list-comment">
+    <h3 class="title">Những nhận xét khác </h3>
+    <span id="list-review-loader" style="display: none;width: 100%;text-align: center;position: absolute;margin-top: 5px;font-style: italic;"> Đang tải... </span>
+    <div id="list-product-review">
+        @Html.Action("ListProductReview", "Widgets", new {id = Model.Id, area = ""})
+    </div>
+</div>
+@using (Html.BeginScripts())
+{
+    <script>
+        HvHelpers.loadJs("/Scripts/jquery.validate.js", $.validator, function () {
+                HvHelpers.loadJs("/Scripts/jquery.validate.unobtrusive.js", $.unobtrusive, function () {
+                    HvHelpers.loadJs("/Scripts/jquery.unobtrusive-ajax.js", $.unobtrusiveAjax);
+                });
+            }, 'asyn');
+    </script>
+    <script src="~/Scripts/jquery.timeago.js"> </script>
+    <script>
+        PagedOnComplete_List = function() {
+            Register();
+            ToIndicate();
+        };
+        Register = function() {
+            $('input[name=rating-list]').rating({
+                
+            }).rating('refresh', { showClear: false, disabled: true, showCaption: false });
+
+            $(".time").timeago();
+            $(".product-review-list").removeClass("hidden");
+
+            $(".review-helpful").bind("click", function() {
+
+                var self = $(this).css("opacity", "0.2").prop('disabled', true);
+                var pointer = $(self.find("b"));
+
+                new Services("ProductReviewHelpfulnessService/Helpfulness", { inf: $(this).data("helpful") }, function(ret) {
+
+                    if (ret == 0) {
+                        HvHelpers.alert("Bạn phải đăng nhập trước khi sử dụng chức năng này!");
+                    } else if (ret < 0) {
+                        HvHelpers.alert("Bạn vừa đánh giá, bạn chỉ có thể đánh giá lại sau " + (ret * -1) + " phút nữa!");
+                    } else {
+                        pointer.html(parseInt(pointer.html()) + ret);
+                    }
+
+                    self.css("opacity", "1").prop('disabled', false);
+
+                }).post();
+
+            });
+        };
+        ToIndicate = function() {
+            $('body').scrollTo($('#list-product-review').offset().top - 20);
+        };
+        $(document).ready(function() { Register(); });
+    </script>
+}

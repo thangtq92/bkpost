@@ -1,0 +1,369 @@
+﻿@using System.Web.Script.Serialization
+@using NB_Commerce.Model.Models
+@using Resources
+@model PagedList.IPagedList<NB_Commerce.Model.Models.ProductCategoryMapping>
+@{
+    Category category = ViewBag.category as Category ?? new Category();
+    ViewBag.Title = category.MetaTitle ?? category.Name;
+    ViewBag.MetaKeywords = category.MetaKeywords;
+    ViewBag.MetaDescription = category.MetaDescription;
+
+    string linkAirportAdvertising = @Utils.GetUrl(EntityName.Category, "airport-advertising") + "?filterby=category-" + category.Id;
+}
+<!-- start: BANNER-TOP -->
+<div class="banner-top-page">
+    @Html.Action("Caller", "StaticBlock", new {identifier = "banner-top-page", area = "",})
+</div>
+<section class="wrapper">
+    <div class="container">
+        <!--start: box-breadcrumb-->
+        @Html.Action("Breadcrumb", "Widgets", new {breadcrumbs = new List<BreadcrumbModel> {new BreadcrumbModel {Link = linkAirportAdvertising, Title = Resource.Prefix_AirportAdvertising}, new BreadcrumbModel {Link = "#", Title = category.Name.Replace(Resource.Prefix_AirportAdvertising, "")}}, homeIncluded = true, area = ""})
+        <!--end: box-breadcrumb-->
+        <div class="row">
+            <!-- start: PAGE CONTENT LEFT -->
+            <div class="col-sm-8 page-content-left">
+                <!--start: page-title -->
+                <div class="page-title">
+                    <h1>@category.Name</h1>
+                </div>
+                <!--end: page-title -->
+                <!--start: service-pages-wrapper -->
+                <div class="service-pages-wrapper">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs service-tabs" role="tablist">
+                        <li class="active"><a href="#service-intro" aria-controls="service-intro" role="tab" data-toggle="tab">Giới thiệu chung</a></li>
+                        <li>
+                            <a href="#service-local" aria-controls="service-local" role="tab" data-toggle="tab">Vị trí quảng cáo</a>
+                        </li>
+                        <li>
+                            <a href="#service-media" aria-controls="service-media" role="tab" data-toggle="tab">Hình ảnh & Video</a>
+                        </li>
+                        <li>
+                            <a href="#service-schedule" aria-controls="service-schedule" role="tab" data-toggle="tab">Các hãng máy bay và chuyến bay</a>
+                        </li>
+                    </ul>
+                    <!-- start: Tab panes -->
+                    <div class="tab-content service-tabs-content">
+                        <!-- start: service-intro -->
+                        <div role="tabpanel" class="tab-pane active service-intro" id="service-intro">
+                            <!-- start: inner-content -->
+                            <div class="inner-content">
+                                @Html.Raw(category.Presentation)
+                            </div>
+                            <!-- end: inner-content -->
+                        </div>
+                        <!-- end: service-intro -->
+                        <!-- start: service-local -->
+                        <div role="tabpanel" class="tab-pane" id="service-local">
+                            <!-- start: inner-content -->
+                            <div class="inner-content">
+                                @foreach (ProductCategoryMapping item in category.ProductCategoryMappings)
+                                {
+                                    foreach (BlogPostProductMapping itemBlog in item.Product.BlogPostProductMappings.Where(e => e.BlogPost.Status == BlogPostStatus.Published && e.BlogPost.BlogPostCategoryMappings.Any(d => d.BlogCategory.Grouped == "referrals-location")))
+                                    {
+                                        <h3 class="title">@itemBlog.BlogPost.Title</h3>
+                                        <p>@Html.Raw(itemBlog.BlogPost.Excerpt) </p>
+                                        <ul class="news-relates">
+                                            @{ List<BlogPost> listRelated = Utils.GetPostByIds(itemBlog.BlogPost.RelatedPost, 3); }
+                                            @foreach (BlogPost ijRelated in listRelated)
+                                            {
+                                                <li>
+                                                    <h2><a href="@Utils.GetUrlBlogPost(ijRelated.Id)">@ijRelated.Title</a></h2>
+                                                </li>
+                                            }
+                                        </ul>
+                                        <div class="content">@Html.Raw(itemBlog.BlogPost.Content)</div>
+                                    }
+                                }
+                                <hr/>
+                                <h3 class="title">Các vị trí nổi bật: <a href="@linkAirportAdvertising" title="-> Xem tất cả"> Xem tất cả</a> </h3> 
+                                @foreach (ProductCategoryMapping item in Model.Where(e => e.Product.IsActive && e.IsFeaturedProduct))
+                                {
+                                    <!-- start: ADV PLACEMENT WRAPPER-->
+                                    <div class="adv-placement-wrapper">
+                                        <!-- start: Slider ADV PLACEMENT ONE-->
+                                        <div id="carousel-example-generic-@item.Id" class="carousel slide" data-ride="carousel">
+                                            <!-- Indicators -->
+                                            @{ ICollection<ProductPictureMapping> listPics = item.Product.ProductPictureMappings; }
+                                            <ol class="carousel-indicators">
+                                                @for (int ij = 0; ij <= listPics.Count() - 1; ij++)
+                                                {
+                                                    <li data-target="#carousel-example-generic" data-slide-to="@ij" class="@(ij == 0 ? "active" : "")"></li>
+                                                }
+                                            </ol>
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner" role="listbox">
+                                                @foreach (ProductPictureMapping picItem in listPics)
+                                                {
+                                                    <div class="item @(picItem == listPics.First() ? "active" : "")">
+                                                        <img src="@Utils.GetImage(picItem.Picture.Url, 770, 501)" alt="@picItem.Picture.Title">
+                                                    </div>
+                                                }
+                                            </div>
+                                            <!-- Controls -->
+                                            <a class="left carousel-control" href="#carousel-example-generic-@item.Id" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#carousel-example-generic-@item.Id" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                        <!-- end: Slider ADV PLACEMENT ONE-->
+
+                                        <!-- start: local-relates -->
+                                        <ul class="news-relates adv-place-info">
+                                            <li>
+                                                <h2><span>Tên:</span> <a href="@Utils.GetUrlProduct(item.ProductId)" title="@item.Product.Name">  @item.Product.Name </a></h2>
+                                            </li>
+                                            @foreach (ProductSpecificationAttributeMapping itemSpecial in item.Product.ProductSpecificationAttributeMappings.Where(e => e.DisplayOrder > -1).OrderByDescending(e => e.DisplayOrder))
+                                            {
+                                                <li>
+                                                    <h2><span>@itemSpecial.SpecificationAttributeOption.SpecificationAttribute.Name:</span>  @(itemSpecial.CustomValue ?? itemSpecial.SpecificationAttributeOption.Name)</h2>
+                                                </li>
+                                            }
+                                            <li>
+                                                <h2><span>Đặc điểm:</span> @Html.Raw(item.Product.ShortDescription)</h2>
+                                            </li>
+                                        </ul>
+                                        <!-- end: local-relates -->
+
+                                    </div>
+                                    <!-- end: ADV PLACEMENT WRAPPER-->
+                                }
+                                
+                            </div>
+                            <!-- end: inner-content -->
+                        </div>
+                        <!-- end: service-local -->
+                        <!-- start: service-media -->
+                        <div role="tabpanel" class="tab-pane" id="service-media">
+                            <!-- start: SHOW CASE -->
+                            <div class="wrapper-box">
+                                <div class="wrapper-content">
+                                    <!-- start: BOX OUR GALLERY -->
+                                    <div class="box-our-gallery">
+                                        <!-- start: filters -->
+                                        <ul id="filters" class="tabs-media button-group">  
+                                            <li><button class="button is-checked" data-filter="*">Tổng quan</button></li>
+                                            @{
+                                                var listPosts = new List<BlogPostProductMapping>();  
+                                             }
+                                             @foreach (ProductCategoryMapping item in category.ProductCategoryMappings.OrderByDescending(e => e.DisplayOrder))
+                                             {
+                                                 var listPostsTemps = item.Product.BlogPostProductMappings.Where(e => (e.BlogPost.Types == BlogPostType.Video || e.BlogPost.Types == BlogPostType.Gallery) && e.BlogPost.Status == BlogPostStatus.Published && e.BlogPost.BlogPostCategoryMappings.Any(d => d.BlogCategory.Grouped == "airline-flight"));
+                                                 var blogPostProductMappings = listPostsTemps as BlogPostProductMapping[] ?? listPostsTemps.ToArray();
+                                                 if (blogPostProductMappings.Any())
+                                                 {
+                                                     var isAdd = false;
+                                                     foreach (var blogPostProductMapping in blogPostProductMappings.OrderByDescending(e=>e.DisplayOrder).ToList())
+                                                     {
+                                                         if (listPosts.All(e => e.BlogPostId != blogPostProductMapping.BlogPostId))
+                                                         {
+                                                             listPosts.Add(blogPostProductMapping);
+                                                             isAdd = true;
+                                                         }
+                                                     }
+                                                     if (isAdd == true) { 
+                                                        <li><button class="button" data-filter=".@item.ProductId">@item.Product.Name</button></li>
+                                                     }
+                                                 }
+                                             }
+                                        </ul>
+                                        <!-- end: filters -->
+                                        <!-- start: isotope -->
+                                        <div class="isotope row" style="height: 344px; position: relative;">
+                                            <div id="photo-video">
+                                                  @foreach (BlogPostProductMapping itemBlog in listPosts.Where(e=>e.BlogPost.Status == BlogPostStatus.Published))
+                                                        {
+                                                            if(itemBlog.BlogPost.Types == BlogPostType.Gallery) {
+                                                                var js = new JavaScriptSerializer();
+                                                                var listPhoto = js.Deserialize<GalleryModel[]>(itemBlog.BlogPost.ContentGallery);
+                                                                foreach (var photo in listPhoto)
+                                                                {
+                                                                    <div class="element-item col-xsm-12 col-xs-4 @itemBlog.ProductId" data-src="@Utils.GetImage(photo.Src, 800, 600)" data-sub-html="@photo.Description" style="left: 0px; position: absolute; top: 0px;">
+                                                                        <a>
+                                                                            <img class="img-responsive" src="@Utils.GetImage(photo.Src, 268, 142)">
+                                                                        </a>
+                                                                        <div class="icon-view valign-wrapper">
+                                                                            <a class="valign center" href="#"><i class="fa fa-search-plus"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                               
+                                                             }
+                                                             else {
+                                                                    var js = new JavaScriptSerializer();
+                                                                    var listVideo = js.Deserialize<VideoModel[]>(itemBlog.BlogPost.ContentVideo);
+                                                                         foreach(var video in listVideo) {
+                                                                             <div class="video element-item col-xsm-12 col-xs-4  @itemBlog.ProductId" data-poster="@video.Thumbnail" data-src="https://www.youtube.com/embed/@video.Src" data-sub-html="@video.Title" style="left: 266px; position: absolute; top: 0px;">
+                                                                                 <a>
+                                                                                     <img class="img-responsive" src="@video.Thumbnail">
+                                                                                     <div class="demo-gallery-poster">
+                                                                                         <img src="http://sachinchoolur.github.io/lightGallery/static/img/play-button.png">
+                                                                                     </div>
+                                                                                 </a>
+                                                                                 <div class="icon-media">
+                                                                                     <i class="fa fa-play-circle"></i>
+                                                                                 </div>
+                                                                                 <div class="icon-view valign-wrapper">
+                                                                                     <a class="valign center" href="#"><i class="fa fa-play-circle-o"></i></a>
+                                                                                 </div>
+                                                                             </div>
+                                                                        }
+                                                            }
+                                                        }
+                                            </div>
+                                        </div>
+                                        <!-- end: isotope -->
+                                    </div>
+                                    <!-- end: BOX OUR GALLERY -->
+                                </div>
+                            </div>
+                            <!-- end: SHOW CASE --> 
+                        </div>
+                        <!-- end: service-media -->
+                        <!-- start: service-schedule -->
+                        <div role="tabpanel" class="tab-pane" id="service-schedule">
+                            <!-- start: inner-content -->
+                            <div class="inner-content">
+                                @foreach (ProductCategoryMapping item in category.ProductCategoryMappings.Where(e=>e.Product.IsActive))
+                                {
+                                    foreach (BlogPostProductMapping itemBlog in item.Product.BlogPostProductMappings.Where(e => e.BlogPost.Types == BlogPostType.Standard && e.BlogPost.Status == BlogPostStatus.Published && e.BlogPost.BlogPostCategoryMappings.Any(d => d.BlogCategory.Grouped == "airline-flight")))
+                                    {
+                                        <h3 class="title">@itemBlog.BlogPost.Title</h3>
+                                        <p>@Html.Raw(itemBlog.BlogPost.Excerpt) </p>
+                                        <ul class="news-relates">
+                                            @{ List<BlogPost> listRelated = Utils.GetPostByIds(itemBlog.BlogPost.RelatedPost, 3); }
+                                            @foreach (BlogPost ijRelated in listRelated)
+                                            {
+                                                <li>
+                                                    <h2><a href="@Utils.GetUrlBlogPost(ijRelated.Id)" title="@ijRelated.Title" target="_blank">@ijRelated.Title</a></h2>
+                                                </li>
+                                            }
+                                        </ul>
+                                        <div class="content">@Html.Raw(itemBlog.BlogPost.Content)</div>
+                                        <hr/>
+                                    }
+                                }
+                            </div>
+                            <!-- end: inner-content -->
+                        </div>
+                        <!-- end: service-schedule -->
+                    </div>
+                    <!-- end: Tab panes -->
+                    <!-- start: Nav tabs -->
+                    <ul class="nav nav-tabs service-tabs" role="tablist">
+                        <li class="active"><a href="#service-intro" aria-controls="service-intro" role="tab" data-toggle="tab">Giới thiệu chung</a></li>
+                        <li>
+                            <a href="#service-local" aria-controls="service-local" role="tab" data-toggle="tab">Vị trí quảng cáo</a>
+                        </li>
+                        <li>
+                            <a href="#service-media" aria-controls="service-media" role="tab" data-toggle="tab">Hình ảnh & Video</a>
+                        </li>
+                        <li>
+                            <a href="#service-schedule" aria-controls="service-schedule" role="tab" data-toggle="tab">Các hãng máy bay và chuyến bay</a>
+                        </li>
+                    </ul>
+                    <!-- end: Nav tabs -->
+                </div>
+                <!--start: service-pages-wrapper -->
+                
+                <div class="box-widgets-wrapper">
+                    <div class="box-title">
+                        <h3><a href="#">Quảng cáo tại sân bay khác</a></h3>
+                    </div>
+                    <ul id="service-hight-light" class="widgets-container owl-carousel">
+                        @foreach (Category innerItem in category.CategoryParent.CategoryChildren.Where(e=>e.IsActive && e.Id != category.Id).OrderByDescending(e=>e.DisplayOrder))
+                        {
+                            <li class="items">
+                                <figure class="box-images">
+                                    <a href="@Utils.GetUrlCategory(innerItem.Id)"><img src="@Utils.GetImage(innerItem.Avatar, 170, 126)" alt="@innerItem.Name"></a>
+                                    <!-- start: MORE -->
+                                    <div class="more">
+                                        <a href="@Utils.GetUrlBlogPost(innerItem.Id)" title="@innerItem.Name"><i class="fa fa-paper-plane"></i></a>
+                                    </div>
+                                    <!-- end: MORE -->
+                                </figure>
+                                <div class="sub-info">
+                                    <h2 class="title"><a href="@Utils.GetUrlBlogPost(innerItem.Id)">@innerItem.Name</a></h2>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- end: PAGE CONTENT LEFT -->
+            <!-- start: PAGE CONTENT RIGHT -->
+            <div class="col-sm-4 page-content-right">
+                @Html.Action("Caller", "StaticBlock", new { identifier = "banner-right-page", area = "" })
+                <!-- start: side-box-wrapper box-service-us -->
+                <div class="side-box-wrapper box-service-us">
+                    <div class="box-title">
+                        <h3>Dịch vụ của chúng tôi</h3>
+                    </div>
+                    @Html.Action("Caller", "StaticBlock", new { identifier = "airportadvertising-focus", area = "" })
+                </div>
+                <!-- end: side-box-wrapper box-service-us -->
+                
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper">
+                    <div class="box-title">
+                        <h3>Bài viết mới nhất</h3>
+                    </div>
+                    @Html.Action("LatestPosts", "Widgets", new { blogCategoryId = -1, take = 3, area = "" })
+                </div>
+                <!-- end: side-box-wrapper -->
+            </div>
+        </div>
+    </div>
+</section>
+@section styles {
+    @Styles.Render("~/bundles/content/default/page/css", "~/bundles/content/default/catalog/category/css")
+}
+@section scripts {
+    @Scripts.Render("~/bundles/content/default/catalog/category/js/default", "~/bundles/content/default/catalog/category/js/air")
+
+    <script>
+       
+        $(document).ready(function () {
+
+            $($("a[href='@Utils.GetUrl(EntityName.Category, "services")']").parent()).addClass("active");
+            var allTabs = $(".service-tabs li");
+
+            var taskTabs = function (target) {
+                allTabs.removeClass("active");
+                $("a[href=" + target + "]").parent().addClass('active');
+                HvHelpers.scrollTo(".page-title", 2);
+
+                if (target == "#service-media") {
+                    $("button.is-checked").trigger("click");
+                }
+            };
+
+            $('#photo-video').lightGallery({
+			  youtubePlayerParams: {
+				modestbranding: 1,
+				showinfo: 0,
+				rel: 0,
+				controls: 0
+			   },
+			   loadYoutubeThumbnail: true,
+               youtubeThumbSize: 'default'
+            });
+
+            if (location.hash !== '') {
+                $('.nav-tabs a[href="' + location.hash.replace('tab_', '') + '"]').tab('show');
+            } else {
+                $('.nav-tabs a:first').tab('show');
+            }
+
+            $('.nav-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                taskTabs($(e.target).attr("href"));
+                window.location.hash = 'tab_' + e.target.hash.substr(1);
+                return false;
+            });
+        });
+    </script>
+}

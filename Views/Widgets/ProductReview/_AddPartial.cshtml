@@ -1,0 +1,157 @@
+﻿@using NB_Commerce.Helpers
+@using NB_Commerce.Repositories
+
+@{ Html.EnableClientValidation(); }
+
+<style>
+    .add-product-review {
+        border-bottom: 1px dotted #999;
+        float: left;
+        padding-bottom: 24px;
+        width: 100%;
+    }
+
+        .add-product-review input {
+            width: 100%;
+        }
+
+        .add-product-review div {
+            margin-bottom: 8px;
+        }
+
+        .add-product-review .submit-review-successful, .add-product-review .submit-review-error {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 14px;
+            border: 1px dotted;
+            padding: 12px;
+            margin: -10px;
+            margin-bottom: 20px;
+        }
+
+        .add-product-review .submit-review-successful {
+            color: green;
+        }
+
+        .add-product-review .submit-review-error {
+            color: #E25831;
+        }
+
+    .rating-xl {
+        font-size: 24px;
+    }
+
+    .rating-container {
+        font-size: 17px;
+        color: #999;
+    }
+
+        .rating-container .rating-stars {
+            
+        }
+
+    .add-product-review h3.title {
+        text-transform: uppercase;
+        color: #E25831;
+        font-size: 12px;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .add-product-review label {
+        font-weight: normal;
+    }
+
+    .add-product-review input[type="text"], .add-product-review textarea {
+        height: 30px;
+        border: 1px solid #F2F2F2;
+        outline: none;
+        padding: 5px 10px;
+        box-shadow: none;
+    }
+
+    .add-product-review textarea {
+        height: 200px;
+        padding: 10px;
+    }
+
+    .add-product-review input[type="checkbox"] {
+        float: left;
+        margin-top: 0px;
+        width: 15px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    .viewed {
+        width: auto;
+        float: left;
+    }
+
+    button.submit {
+        background-color: #E25831;
+        padding: 0 10px;
+        color: #fff;
+        outline: none;
+        line-height: 30px;
+        border: none;
+    }
+    .field-validation-error {
+        margin-left: 0px;
+    }
+</style>
+
+<div id="add-product-review" class="add-product-review hidden">
+    @Html.Action("AddProductReview", "Widgets", new {id = Model.Id, area = ""})
+</div>
+@using (Html.BeginScripts())
+{
+     <script>
+         HvHelpers.loadJs("/Scripts/jquery.validate.js", $.validator, function () {
+             HvHelpers.loadJs("/Scripts/jquery.validate.unobtrusive.js", $.unobtrusive, function () {
+                 HvHelpers.loadJs("/Scripts/jquery.unobtrusive-ajax.js", $.unobtrusiveAjax);
+             });
+         }, 'asyn');
+    </script>
+
+    <script>
+        PagedOnComplete_Add = function () {
+
+            $('input[name=Rating]').rating({
+                starCaptions: function (val) {
+                    var level = "";
+                    if (val < 1) level = "Kém";
+                    else if (val < 3) level = "Bình thường";
+                    else if (val < 5) level = "Tốt";
+                    else level = "Tuyệt vời";
+                    return val + " - " + level;
+                },
+                starCaptionClasses: function (val) {
+                    if (val < 3)
+                        return 'label label-primary';
+                    else if (val < 6)
+                        return 'label label-warning';
+                    else if (val < 9)
+                        return 'label label-important';
+                    else
+                        return 'label label-success';
+                },
+                hoverOnClear: false
+            });
+
+            $(":submit").closest("form").submit(function () {
+                $(':submit').attr('disabled', 'disabled');
+            });
+
+            if ($(".submit-review-successful").size() > 0) {
+                setTimeout(function () {
+                    $(".submit-review-successful").hide();
+                }, 7200);
+            }
+            $(".add-product-review").removeClass("hidden");
+        };
+        $(document).ready(function () { PagedOnComplete_Add(); });
+
+    </script>
+}

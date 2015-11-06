@@ -1,0 +1,70 @@
+﻿@using NB_Commerce.Model.Models
+@model NB_Commerce.Model.Models.BlogPost
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    ViewBag.Title = Model.MetaTitle ?? Model.Title;
+    ViewBag.MetaKeywords = Model.MetaKeywords;
+    ViewBag.MetaDescription = Model.MetaDescription ?? Model.Excerpt;
+    var scope = Request.QueryString["scope"];
+    if (string.IsNullOrEmpty(scope))
+    {
+        scope = "title,excerpt,relatedpost,content";
+    }
+    var listBlogRelated = new List<BlogPost>();
+
+    if (scope.Contains("relatedpost"))
+    {
+       listBlogRelated = Utils.GetPostByIds(Model.RelatedPost, 10);
+    }
+    
+}
+@Styles.Render("~/bundles/content/default/blog/blog-post/css")
+
+<!-- MAIN CONTENT -->
+<!-- start: detail-news-contents -->
+<div class="detail-news-contents">
+    @if(scope.Contains("title")) {
+    <!-- start: news-detail-title -->
+        <div class="news-detail-title">
+            <h1>@Model.Title</h1>
+        </div>
+        <br/>
+    }
+    <!-- end: news-detail-title -->
+    @if (scope.Contains("excerpt"))
+    {
+        <!-- start: news-detail-description -->
+        <div class="news-detail-description">
+            <h2>@Html.Raw(Model.Excerpt)</h2>
+        </div>
+        <!-- end: news-detail-description -->
+    }
+     @if (scope.Contains("relatedpost"))
+     {
+        <!-- start: news-relates --> 
+        <ul class="news-relates">
+            @foreach (BlogPost itemrelated in listBlogRelated)
+            {
+                <li>
+                    <h3>
+                        <a title="@itemrelated.Title" href="@Utils.GetUrlBlogPost(itemrelated.Id)">
+                            @itemrelated.Title
+                        </a>
+                    </h3>
+                </li>
+            }
+        </ul>
+        <!-- end: news-relates -->
+     }
+     @if (scope.Contains("content"))
+     {
+         <!-- start: news-detail-main -->
+         <div class="news-detail-main">
+            @Html.Raw(Model.Content)
+         </div>
+         <!-- end: news-detail-main -->
+     }
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/content/default/blog/blog-post/js")
+}

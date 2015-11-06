@@ -1,0 +1,9 @@
+﻿@if (ViewBag.NoWrapper == true)
+{
+    @Html.Action("CallerData", "StaticBlock", new { identifier = ViewBag.identifier, area = "" })
+}
+else {
+    <div class="data-block" id="@ViewBag.identifier">
+        @Html.Action("CallerData", "StaticBlock", new { identifier = ViewBag.identifier, area = "" })
+    </div>
+}

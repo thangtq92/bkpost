@@ -1,0 +1,25 @@
+﻿@using NB_Commerce.Model.Models
+@model List<NB_Commerce.Model.Models.Product>
+<ul class="row">
+    @foreach (Product product in Model)
+    {
+        <li class="item col-xsm-12 col-xs-6 col-md-6"><!-- start: item-inner -->
+            <div class="item-inner">
+                <div class="box-images"><a href="#"><img alt="@product.Name" src="@Utils.GetImage(product.Picture.Url, 202, 202)" /></a>
+                    <div class="icon-view valign-wrapper"><a class="valign center" href="@Utils.GetUrlProduct(product.Id)"><i class="fa fa-search-plus"></i></a></div>
+                </div>
+
+                <div class="service-info">
+                    <h3>@product.Name</h3>
+                    <ul class="link-tag">
+                        @foreach(var tag in product.ProductProductTagMappings.Where(e=>e.ProductTag.IsActive == true).OrderByDescending(e=>e.DisplayOrder).ToList()) {
+                            <li><a href="@Utils.GetUrlProductTag(tag.ProductTagId)">@tag.ProductTag.Name</a></li>
+                        }
+                    </ul>
+                    <p class="except-3">@Html.Raw(product.ShortDescription)</p>
+                    <a class="view-more" href="@Utils.GetUrlProduct(product.Id)">@Resources.Resource.Read_More_Text</a></div>
+            </div>
+        </li>
+        <!-- end: item-inner -->
+    }
+</ul>

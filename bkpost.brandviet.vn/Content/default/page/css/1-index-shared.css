@@ -1,0 +1,109 @@
+/*Layout PAGE CHILDREN*/
+/*content-page-layout*/
+.content-page-layout { margin-bottom: 20px;}
+/*left-page-layout*/
+.left-page-layout .menu-sidebar, .left-page-layout .hotline { margin-bottom: 10px;}
+.left-page-layout .hotline, .left-page-layout .banner-adv {text-align: center;}
+.left-page-layout .menu-sidebar .head-box-title { margin-bottom: 10px;}
+.left-page-layout .menu-sidebar .list-links ul li a {display: inline-block;width: 100%; background-color: #e3f2fd;padding:10px;border-bottom: 1px solid #dce3e8;font-weight: 700;}
+.left-page-layout .menu-sidebar .list-links ul li a:hover, .left-page-layout .menu-sidebar .list-links ul li a.active { background-color: #f4f9fd; color: #0363a0}
+.left-page-layout .banner-adv a img{ margin-bottom: 5px;}
+/*layout-page-wrap*/ 
+.layout-page-wrap  { margin-top: 30px;}
+.layout-page-wrap .block-title { margin-bottom: 10px;}
+/*content-page-layout*/
+.content-page-layout  .box-breadcrumb .breadcrumb { background-color: transparent;border-bottom: 1px solid #c8c8c8;border-radius: 0;padding: 7px 0;margin-bottom: 15px;}
+.breadcrumb>li+li:before { content: "\f105"; font-family: FontAwesome}
+.content-page-layout  .box-breadcrumb .breadcrumb>li { font-size: 14px;}
+.content-page-layout  .box-breadcrumb .breadcrumb>li:first-child a {color: #014e82}
+.content-page-layout  .box-breadcrumb .breadcrumb>li h1 {display: inline-block}
+.content-page-layout  .box-breadcrumb .breadcrumb>li>a { color: #5d5d5d; font-size: 14px;}
+.content-page-layout  .box-breadcrumb .breadcrumb>li>a:hover {color: #014e82}
+.content-page-layout  .box-breadcrumb .breadcrumb>.active {color: #014e82}
+/*category-news-wrap*/
+.category-news-wrap {display: inline-block; width: 100%}
+.category-news-wrap .hight-light { width: 60%;float: left}
+.category-news-wrap .hight-light .title {margin-bottom: 10px;}
+.category-news-wrap .hight-light .title a { font-weight: 700;color: #333;font-size: 13px; }
+.category-news-wrap .hight-light:hover .title a {color: #0363a0}
+.category-news-wrap .hight-light .box-images{ width: 45%;}
+.category-news-wrap .hight-light .box-info .description
+{
+    overflow: hidden;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+.main-list-items .items-inner .box-info .description
+{
+    overflow: hidden;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.main-list-items .items-inner .box-info .title { overflow: hidden;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;}
+
+.category-news-wrap .hight-light .box-info .time { color: #999; font-style: italic}
+.category-news-wrap .hight-light .box-info .view-more{float: right;font-size: 12px;color: #0363a0;}
+.category-news-wrap .hight-light .box-info .view-more:hover {color: #fbaf17}
+.category-news-wrap .list-items { width: 40%;float: right; padding-left: 23px}
+.category-news-wrap .list-items .item{ list-style-type: disc;color: #fbaf17;margin-bottom: 5px}
+.category-news-wrap .list-items .item:last-child{margin: 0}
+.category-news-wrap .list-items .item .title { margin-left: -5px;}
+.category-news-wrap .list-items .item .title a { color: #333;}
+.category-news-wrap .list-items .item:hover, .category-news-wrap .list-items .item:hover .title a {color: #0363a0}
+
+/*inner-box-sidebar*/
+.banner-adv-side { margin-bottom: 20px;}
+.inner-box-sidebar { margin-bottom: 20px;}
+.inner-box-sidebar .head-box-title { margin-bottom: 10px;}
+.inner-box-sidebar .list-items .item{    display: inline-block;width: 100%;margin-bottom: 10px;}
+.inner-box-sidebar .list-items .item:last-child { margin: 0;}
+    .inner-box-sidebar .list-items .item:hover .title a {color: #0363a0;}
+.inner-box-sidebar .box-info .title a { font-size: 12px;font-weight: 700;color: #333;line-height: 17px;    margin-bottom: 7px}
+.inner-box-sidebar .box-info .time, .inner-box-sidebar .box-info .view-icon {float: left; color: #aaa;font-style: italic;}
+.inner-box-sidebar .box-info .time { margin-right: 10px;}
+.inner-box-sidebar .box-info .view-icon .fa { margin-right: 5px;}
+/*.inner-box-sidebar.style-line*/
+.inner-box-sidebar.style-line .list-items .item:not(:last-child) {    padding-bottom: 10px; border-bottom: 1px solid #ebebeb;}
+.inner-box-sidebar .title-category { margin-bottom: 5px;}
+.inner-box-sidebar .title-category a { text-transform: uppercase;color: #999;font-size: 11px;margin-bottom: 5px;}
+.inner-box-sidebar .title-category a:hover {color: #fbaf17}
+/*list-tags*/
+.list-tags, .list-tags ul { width: 100%;display: inline-block;margin: 0;}
+.list-tags ul li {float: left}
+.list-tags ul li a {float: left; border: 1px solid #b2b2b2; padding: 8px 10px; font-size: 13px; color: #666; margin: 0 5px 5px 0; font-weight: 700;}
+.list-tags ul li a:hover { background-color: #01669a;color: #fff; border-color: #01669a}
+
+/*main-list-items*/
+.main-list-items .items-inner {margin-bottom: 20px;padding-bottom: 20px;border-bottom: 1px solid #ddd;display: inline-block;width: 100%;}
+.items-inner .box-images{ position: relative;}
+.items-inner .box-images .more-status { position: absolute;top: 0;right: 0;padding: 5px}
+.items-inner .box-images .more-status span { color: #fff;font-size: 12px; margin-left: 5px;}
+.items-inner .box-images .more-status span .fa { margin-right: 5px;font-size: 12px}
+.main-list-items .items-inner .title-category {position: relative}
+.main-list-items .items-inner .title-category a { font-size: 11px;color: #999;text-transform: uppercase; font-weight: 700}
+.main-list-items .items-inner .title-category .time{position: absolute; right: 0; top: 0; font-size: 12px; color: #999;}
+.main-list-items .items-inner .box-info .title { margin: 5px 0;}
+.main-list-items .items-inner .box-info .title a { font-weight: 700;color: #222;}
+.main-list-items .items-inner:hover .box-info .title a { color: #0363a0;}
+.main-list-items .items-inner .box-info .description { margin: 0;}
+
+/*tags input*/
+.search-tags-wrapper span.tags { background-color: #0363a0;color: #fff;font-weight: 700;font-size: 10px;text-transform: uppercase;padding: 2px 7px 0 7px;border: 0;padding: 4px 7px;line-height: 21px;border-radius: 2px;cursor: pointer;}
+.search-tags-wrapper span.count { color: #0363a0;font-size: 15px; font-weight: 700}

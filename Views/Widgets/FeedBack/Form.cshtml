@@ -1,0 +1,59 @@
+﻿@model NB_Commerce.Models.FeedBack
+@using (Ajax.BeginForm("FeedBack", "Widgets", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "add-feedback", LoadingElementId = "add-feedback-loader", OnComplete = "PagedFeedBackLoaded" }))
+{
+    @Html.HiddenFor(model=>model.Type)
+    <input value="@ViewBag.annoField" type="hidden" name="annoField" id="annoField"/>
+    if(ViewBag.Notify != null) {
+       @Html.Raw(ViewBag.Notify)
+    }
+    if (Model.Type == "status-disabled" || Model.Type == "type-incorrect")
+    {
+    
+    }
+    else {
+        if (Model.AnnoFullName[2] != "hidden")
+        {
+           <span class="input ">
+                <input class="input-field" type="text" id="FullName" name="FullName" @(Model.AnnoFullName[2] == "required"? "required": "") value="@Model.FullName" />
+                  <label class="input-label" for="FullName">
+                      <span class="input-label-content @(Model.AnnoFullName[2] == "required"? "required": "")"><i class="fa fa-user"></i>@Model.AnnoFullName[0]</span>
+                      @Html.ValidationMessageFor(model => model.FullName)
+                </label>
+           </span>
+        }
+        if (Model.AnnoEmail[2] != "hidden")
+        {
+            <span class="input ">
+                <input class="input-field" type="email" id="Email" name="Email" @(Model.AnnoEmail[2] == "required"? "required": "") value="@Model.Email" />
+                <label class="input-label" for="Email">
+                    <span class="input-label-content @(Model.AnnoEmail[2] == "required"? "required": "")"><i class="fa fa-envelope"></i>@Model.AnnoEmail[0]</span>
+                    @Html.ValidationMessageFor(model => model.Email)
+                </label>
+            </span>
+        }
+        if (Model.AnnoPhone[2] != "hidden")
+        {
+            <span class="input ">
+                <input class="input-field" type="tel" id="Phone" name="Phone" @(Model.AnnoPhone[2] == "required"? "required": "") value="@Model.Phone" />
+                <label class="input-label" for="Phone">
+                    <span class="input-label-content @(Model.AnnoPhone[2] == "required"? "required": "")"><i class="fa fa-phone"></i>@Model.AnnoPhone[0]</span>
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </label>
+            </span>
+        }
+        <span class="input ">
+            <input class="input-field" type="text" id="Message" name="Message" />
+            <label class="input-label" for="Message">
+                <span class="input-label-content"><i class="fa fa-pencil"></i>@Html.DisplayTextFor(model=>model.AnnoMessage[0])</span>
+                @Html.ValidationMessageFor(model => model.Message)
+            </label>
+        </span>
+       
+        <span class="input">
+           <button class="submit" type="submit" ><i class="clip-paperplane"></i> <span id="add-feedback-loader" style="display:none;"> @Html.DisplayTextFor(model=>model.AnnoButton[1]) </span> @Html.DisplayTextFor(model=>model.AnnoButton[0]) </button>
+        </span>
+        <p class="notes">
+            @Html.Raw(Model.Notes)
+        </p>
+    }
+}

@@ -1,0 +1,96 @@
+﻿@using NB_Commerce.Helpers
+@using NB_Commerce.Models
+@model List<NB_Commerce.Models.GalleryModel>
+@Styles.Render("~/bundles/content/default/blog/blog-gallery/css")
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="/content/plugins/light-gallery/css/lightGallery.css" type="text/css" media="screen" />
+<style>
+.showThumbByDefault #lg-gallery.open .lg-slide {
+    padding-bottom: 120px;
+}
+.showThumbByDefault #lg-gallery .thumb-cont .thumb-info{
+    display:none;
+}
+/*/ actions */
+.showThumbByDefault #lg-action {
+    position: static;
+}
+.showThumbByDefault #lg-action a {
+    margin-top: -14px !important;
+    position: absolute;
+    top: 50%;
+    z-index: 9999999;
+    background-color: transparent;
+    font-size: 28px;
+}
+.showThumbByDefault #lg-action a#lg-prev {
+    left: 17px;
+}
+.showThumbByDefault #lg-action a#lg-next {
+    right: 17px;
+}
+</style>
+<section class="wrapper-box our-gallery">
+<ul class="nav nav-tabs" role="tablist">
+    @foreach (GalleryModel item in Model)
+    {
+        <li @(item == Model.FirstOrDefault() ? "class=active" : "")><a data-toggle="tab" href="#@item.Id" role="tab">@item.Title </a></li>
+    }
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+    @foreach (GalleryModel item in Model)
+    {
+        <div class="tab-pane fade active in @(item == Model.FirstOrDefault() ? "" : "active-virtual")" id="@item.Id"><!-- start: BODY SLIDER  -->
+            <div class="owl-carousel gallery">
+                @{
+                   var len = item.Sources.Count(); 
+                   var rendered = new List<int>();
+                }
+                @for (int i = 0; i <= len - 1; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        <!-- start: item inner  -->
+                        @Html.Raw("<div class='item-inner'>")
+                    }
+                    <div class="box-images" data-src="@item.Sources[i].Src">
+                        <a href="#" title="@item.Sources[i].Alt"><img src="@Utils.GetImage(item.Sources[i].Src)" /></a>
+                        <div class="icon-view valign-wrapper">
+                            <a class="valign center"  href="#"><i class="fa fa-search-plus"></i></a>
+                        </div>
+                    </div>
+                    rendered.Add(i);
+                    if (i % 2 == 1 || (len - 1 == i))
+                    {
+                        for (int ij = 0; ij <= len - 1; ij++)
+                        {
+                            if(rendered.All(e => e != ij)) {
+                                <div class="hidden" data-src="@item.Sources[ij].Src">
+                                    <a href="#" title="@item.Sources[ij].Alt"><img src="@Utils.GetImage(item.Sources[ij].Src)" /></a> 
+                                </div>
+                            }
+                        }	    
+                        @Html.Raw("</div>") <!-- end: item inner  -->   
+                    }  					
+                }
+            </div>
+        </div>
+    }
+</div>
+<!-- end: owl carousel  -->
+</section>
+@using (Html.BeginScripts())
+{
+  @Scripts.Render("~/bundles/content/default/blog/blog-gallery/js")
+  <script src="/content/plugins/light-gallery/js/lightGallery.js"></script>
+  <script>
+      $(document).ready(function () {
+          $(".gallery .item-inner").lightGallery({
+              showThumbByDefault: true,
+              addClass: 'showThumbByDefault'
+          });
+      });
+  </script>
+}

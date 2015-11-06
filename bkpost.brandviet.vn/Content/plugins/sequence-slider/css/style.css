@@ -1,0 +1,112 @@
+/*Sequence Slider by QuyetThang*/
+
+/*~~~~~~~~~~~ HOME PAGE SLIDER ~~~~~~~~~*/
+.flat-caption{padding:0;font-size:20px;line-height:28px;color:#fff;position:relative;}
+.flat-caption .suphead{text-align:left;font-size:25px;text-transform:uppercase;padding-bottom:10px;}
+.flat-caption h1{font-size:45px;font-weight:300;line-height:45px;text-transform:uppercase;width:100%;}
+.flat-caption h2{font-size:22px;line-height:30px;text-transform:uppercase;}
+.flat-caption h3{font-size:35px;line-height:43px}
+.flat-caption p{font-size:14px;}
+.flat-button{padding:0}
+.flat-button a.more{border:1px solid #fff;padding:10px 50px 10px 15px;-webkit-border-radius:10px;border-radius:10px;background:url(../images/more-icon.png) right 10px top 7px no-repeat;color:#fff;}
+.flat-button a.more:hover{background-color:#f7544a;border-color:#da2a20;}
+.flat-image img{width:auto;height:auto;}
+/* HOME2 SLIDER */
+.slide-caption{float:left;width:48%;text-align:center;margin-top:110px;color:#fff;}
+.animate-in .caption-container {width: 400px;text-align: center;}
+.slide-caption .caption-sub-title p{float:left;width:100%;text-align:left;font-size:25px;text-transform:uppercase;padding-bottom:10px;}
+.slide-caption h1{float:left;width:100%;text-align:left;font-size:45px;line-height:45px;font-weight:300;text-transform:uppercase;padding-bottom:10px;}
+.slide-caption p{padding-bottom:20px;}
+.slide-caption .more{border:1px solid #fff;padding:10px 50px 10px 15px;-webkit-border-radius:10px;border-radius:10px;background:url(../images/more-icon.png) right 10px top 7px no-repeat;color:#fff;}
+.slide-caption .more:hover{background-color:#f7544a;border-color:#da2a20;}
+
+/*MAIN SLIDER HOME*/
+.flat-caption {width: 100%; }
+
+.caption-container {}
+#sequence>.sequence-prev, #sequence>.sequence-next {top: 50%;width: 34px;height: 34px;margin-top: -30px;z-index: 20;font-size: 18px;line-height: 34px;}
+#sequence>.sequence-prev:hover, #sequence>.sequence-next:hover { background-color: #0071c7; color: #fffefe;}
+.sequence-canvas li {  -moz-background-size: cover!important;-webkit-background-size: cover!important;background-size: cover!important;transition: background 3s linear; -ms-transition: background 3s linear; -o-transition: background 3s linear;  transition: background 3s linear;  -webkit-transition: background 3s linear;  -moz-transition: background 3s linear;}
+.sequence-canvas li .flat-caption h3{font-size:48px;width:100%;font-weight:700;color:#ff444d;text-transform:uppercase;letter-spacing:1}
+.sequence-canvas li .flat-caption h3 span.color {color:#fff;}
+.sequence-canvas li .flat-caption h3 span.slogan {display: block;line-height: 15px;color: #333;font-size: 16px;  margin-top: 10px;}
+.sequence-canvas li .flat-caption .caption-container .caption-description p {  color: #2c2c2c;}
+.sequence-canvas li .flat-caption .caption-readmore {  margin-top: 20px;}
+.sequence-canvas li .flat-caption .caption-readmore a{font-size: 14px; color: #fff; background-color: #0071c7; border: 1px solid transparent; padding: 10px 20px; border-radius: 2px; transition: all linear .3s}
+.sequence-canvas li .flat-caption .caption-readmore a:hover{  background-color: transparent; border-color: #0071c7; color: #0071c7}
+.sequence-canvas li:nth-child(1) .flat-caption{top: 80px}
+.sequence-canvas li:nth-child(1) .flat-caption .caption-container .caption-sub-title span,
+.sequence-canvas li:nth-child(2) .flat-caption .caption-container .caption-sub-title span{font-size: 18px;color: #2c2c2c;font-weight: 700;border-top: 1px solid rgba(0,0,0,.4);padding: 5px 0;  margin-top: 10px;display: inline-block;}
+
+.sequence-canvas li:nth-child(2) .flat-caption {top: 80px; }
+.sequence-canvas li:nth-child(2) .caption-container { float: right;}
+
+.sequence-canvas li:nth-child(3) .flat-caption {top: 150px; }
+
+/* Fixed Mobile*/
+@media (max-width: 1280px) {
+}
+
+@media (min-width: 1025px){
+	
+}
+@media (max-width:992px){
+
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	
+
+}
+@media (max-width: 767px){
+	
+    /*	MAIN SLIDER*/
+	#sequence {height: 400px}
+	#sequence>.sequence-canvas {height: auto;}
+	#sequence>.sequence-canvas li {height: 472px;  background-size: cover!important;}
+	.animate-in .caption-container { width: 100%;}
+	.sequence-canvas li .flat-caption h3 {font-size: 30px;}
+	.sequence-canvas li .flat-caption h3 p {font-size: 11px;margin-top: -5px;}
+	.sequence-canvas li:nth-child(1) .flat-caption .caption-container .caption-sub-title span, 
+	.sequence-canvas li:nth-child(2) .flat-caption .caption-container .caption-sub-title span {  font-size: 13px; padding: 0;margin: 5px;}
+	.sequence-canvas li .flat-caption .caption-container .caption-description p {font-size: 12px; line-height: 18px;width: 80%; margin: 0px auto;}
+	.sequence-canvas li .flat-caption .caption-readmore { margin-top: 15px;}
+	.sequence-canvas li .flat-caption .caption-readmore a { padding: 5px 10px;}
+	#sequence>.sequence-prev {left: 15px;}
+	#sequence>.sequence-next {right: 15px;}
+	
+}
+/*Mobile Iphone6*/
+@media (min-width: 568px) and (max-width: 767px) {
+	
+	
+}
+/*Mobile Iphone5*/
+@media (min-width: 568px) and (max-width: 666px) {
+
+	
+}
+@media (max-width: 567px) {
+
+}
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+@media (max-width: 479px) {
+
+}
+
+/*Iphone 6*/
+@media (min-width: 375px) and (max-width: 480px){
+
+}
+@media (min-width: 667px) and (max-width: 767px){   
+
+}
+
+@media (max-width: 320px) {
+        
+}
+
+
+

@@ -1,0 +1,124 @@
+﻿﻿@{
+    var category = ViewBag.category as Category ?? new Category();
+    ViewBag.Title = category.MetaTitle ?? category.Name;
+    ViewBag.MetaKeywords = category.MetaKeywords;
+    ViewBag.MetaDescription = category.MetaDescription;
+}
+@using NB_Commerce.Model.Models
+
+<!-- start: BANNER-TOP -->
+<div class="banner-top-page">
+	@Html.Action("Caller", "StaticBlock", new { identifier = "banner-top-page", area = "" })
+</div>
+<section class="wrapper">
+    <div class="container">
+        <!--start: box-breadcrumb-->
+        @Html.Action("Breadcrumb", "Widgets", new { breadcrumbs = new List<BreadcrumbModel> { new BreadcrumbModel { Link = Utils.GetUrlCategory(Convert.ToInt32(category.ParentCategoryId)), Title = category.CategoryParent.Name }, new BreadcrumbModel { Link = "#", Title = category.Name } }, homeIncluded = true, area = "" })
+        <!--end: box-breadcrumb-->
+        <div class="row">
+            <!-- start: PAGE CONTENT LEFT -->
+            <div class="col-sm-8 page-content-left">
+                        <!--start: page-title -->
+                        <div class="page-title">
+                           <h1>Vị trí quảng cáo sân bay </h1>
+                        </div>
+                        <!--end: page-title -->
+                        <section id="list-product-content">
+                            @Html.Partial("~/Views/Catalog/Category/AirportAdvertisingFilter_Partial.cshtml")
+                        </section>
+                        <!-- start: banner-adv-airport -->
+                             @Html.Action("Caller", "StaticBlock", new { identifier = "banner-center-page", area = "" })
+                        <!-- end: banner-adv-airport -->
+                     </div>
+            <!-- end: PAGE CONTENT LEFT -->
+            <!-- start: PAGE CONTENT RIGHT -->
+            <div class="col-sm-4 page-content-right">
+                @Html.Action("Caller", "StaticBlock", new { identifier = "banner-right-page", area = "" })
+                <!-- start: side-box-wrapper box-service-us -->
+                <div class="side-box-wrapper box-service-us">
+                    <div class="box-title">
+                        <h3>Dịch vụ của chúng tôi</h3>
+                    </div>
+                     @Html.Action("Caller", "StaticBlock", new { identifier = "pageright-service-focus", area = "" })
+                </div>
+                <!-- end: side-box-wrapper box-service-us -->
+                
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper">
+                    <div class="box-title">
+                        <h3>Bài viết mới nhất</h3>
+                    </div>
+                    @Html.Action("LatestPosts", "Widgets", new { blogCategoryId = -1, take = 3, area = "" })
+                </div>
+                <!-- end: side-box-wrapper -->
+            </div>
+        </div>
+    </div>
+</section>
+@section styles {
+    @Styles.Render("~/bundles/content/default/page/css", "~/bundles/content/default/catalog/category/css")
+}
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        var filterby = function () {
+            var filterby = [];
+            $.each($(".filter-by .selected"), function (k, v) {
+                var val = $(v).attr("data-val");
+                if(val!="")
+                   filterby.push(val);
+            });
+            return filterby.join(',');
+        };
+        var changeUrl = function (filterby, page) {
+            var query = "";
+            if (filterby.indexOf("-") == -1 && page == 1) query = "?filterby=-1";
+            else if (filterby.indexOf("-") == -1)  query = "?page=" + page + "";
+            else query = "?filterby=" + filterby + "&page=" + page + "";
+            // updated:
+            if (query == "") history.pushState(null, null, location.pathname);
+            else 
+                history.pushState(null, null, query);
+        };
+    </script>
+    <script>
+        $(document).ready(function () {
+            var wrapperList = $("#list-product-content");
+            window.PagedOnBegin = function () {
+                wrapperList.find(".list-adv-place").css("opacity", "0.5");
+            };
+            window.PagedOnComplete = function () {
+
+                $(".filter-by li a").bind("click", function (e) {
+                    e.preventDefault();
+                    var self = $(this);
+                    
+                    $("#" + self.attr("data-parent")).html(self.text()).attr("data-val", self.attr("data-val"));
+                    setTimeout(function () {
+                        PagedOnBegin();
+                        $.get('@Url.Action("Page", "Home")', { filterby: filterby() }, function (data) {
+                            $('#list-product-content').html(data);
+                             PagedOnComplete();
+                        });
+                    }, 1);
+                    
+                });
+                var setSelected = function (vals) {
+                    $.each(vals.split(','), function (k, v) {
+                        if (v != "") {
+                            var ele = $("a[data-val="+ v +"]");
+							if (ele.attr("data-val") != "-1") {
+                              $("#" + ele.attr("data-parent")).html(ele.text()).attr("data-val", v);
+							}
+                        }
+                    });
+                };
+                setSelected($("#filterBy").val());
+                
+                wrapperList.find(".list-adv-place").css("opacity", "1"); changeUrl(filterby(), $("#page").val());
+                
+            };
+            window.PagedOnComplete();
+        });
+    </script>
+}

@@ -1,0 +1,35 @@
+﻿@using NB_Commerce.Model.Models
+@using PagedList.Mvc
+@model PagedList.IPagedList<NB_Commerce.Model.Models.User>
+<ul class="col-xs-12 list-our-staff-inner hidden">
+    @if (Model.Count > 0)
+    {
+        foreach (User item in Model)
+        {
+            <li class="col-xs-12 item">
+                <div class="col-xs-2 left">
+                    <img src="@item.Avatar" />
+                    
+                    <time class="time" datetime="@item.LastModified"></time>
+                </div>
+                <div class="col-xs-10 right">
+                    <strong>@item.FullName</strong>
+                    <p>@item.Brief</p>
+                </div>
+            </li>
+        }
+    }
+</ul>
+<input id="page-our-staff" type="hidden" value="@Model.PageNumber"/>
+@if(Model.PageCount > 1) {
+    <div class="paging">
+        @Html.PagedListPager(Model, page => Url.Action("ListOurStaffs", "Widgets", new { ViewBag.orderBy, ViewBag.pageSize, page }), 
+                                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions { 
+                                                                                                                    LinkToPreviousPageFormat = "<", LinkToNextPageFormat = ">", MaximumPageNumbersToDisplay = 2 }, new AjaxOptions {
+                                                                                                                                                                                                                                        HttpMethod = "GET",
+                                                                                                                                                                                                                                        UpdateTargetId = "list-our-staff",
+                                                                                                                                                                                                                                        LoadingElementId = "list-our-staff-loader",
+                                                                                                                                                                                                                                        OnComplete = "PagedOnComplete_List"
+                                                                                                                                                                                                                                    }))
+    </div>
+}

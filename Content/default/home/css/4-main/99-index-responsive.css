@@ -1,0 +1,149 @@
+﻿/* ###--------------#  File index responsive  #--------------###*/
+@media (max-width: 1280px) {
+
+}
+
+@media(max-width:992px){
+    .hot-line-phone h3 { -ms-background-size: 130px;background-size: 130px;font-size: 23px;margin-top: 10px;}
+}
+@media(max-width: 1280px){
+    /*main-slider*/
+    .head-box-content .news-top .box-images { width: 40%;}
+    .head-box-content .news-top .box-images img { width: 100%;}
+    .index-page-wrap .main-slider-wrap, .services-wrap, .news-wrap { margin-bottom: 30px;}
+    .services-wrap .box-info .title { font-size: 14px;}
+}
+/*Table ipad*/
+@media (min-width: 992px) and (max-width: 1280px) {
+	/*main-slider*/
+    .head-box-content .news-top .box-info .description {display: none}
+    .hot-line-phone h3 { -ms-background-size: 130px;background-size: 130px;font-size: 22px;margin-top: 10px;}
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .promotions-wrap .times-now, .head-box-content .news-top .box-info .time { display: none;}
+    .head-box-content .list-items {display: none}
+    .news-promotion { width: 85%;}
+    /*NEWS*/
+    .news-wrap .hight-light { width: 45%;}
+    .news-wrap .list-items { width: 55%;padding-left: 20px}
+}
+@media (max-width: 780px){
+
+    .news-promotion { width: 85%;}
+    @-webkit-keyframes cd-bounce-in {
+      0% {
+        -webkit-transform: scale(0);
+      }
+
+      60% {
+        -webkit-transform: scale(1.2);
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+      }
+    }
+    @-moz-keyframes cd-bounce-in {
+      0% {
+        -moz-transform: scale(0);
+      }
+
+      60% {
+        -moz-transform: scale(1.2);
+      }
+
+      100% {
+        -moz-transform: scale(1);
+      }
+    }
+    @keyframes cd-bounce-in {
+      0% {
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+        transform: scale(0);
+      }
+
+      60% {
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+
+      100% {
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+
+}
+@media (max-width: 767px){
+	
+    
+    .index-page-wrap .promotions-wrap .hight-light {margin-bottom: 25px;}
+    .news-promotion .owl-controls {right: 0;top: -30px;}
+    .promotions-wrap .times-now {display: none}
+    .main-slider { margin-bottom: 20px;}
+    .news-promotion { width: 100%;padding: 0; margin-top: 5px;}
+    .index-page-wrap .main-slider-wrap, .services-wrap, .news-wrap {margin: 5px 0 20px 0}
+    .services-wrap .box-images { width: 100%;margin-bottom: 10px;}
+    .services-wrap .box-images img {width: 100%}
+    .head-box-content .list-items li h3 a, .news-hightlight .title a {font-size: 14px;}
+    /*services*/
+    .services-wrap .box-info .description {font-size: 14px}
+    .services-wrap .box-info .title {font-size: 15px;}
+    
+    /*ACTIVITIES-SLIDER*/
+    .activities-slider .item .box-images {width: 35%;float: left;margin-right: 10px;}
+    .activities-slider .item 
+    .activities-slider .item , .news-wrap .list-items .item .box-info .title { font-size: 14px;}
+}
+/*Mobile Iphone6*/
+@media (min-width: 568px) and (max-width: 767px) {
+	
+}
+/*Mobile Iphone5*/
+@media (min-width: 568px) and (max-width: 666px) {
+	
+}
+@media (max-width: 567px) {
+    .head-box-content .news-top .box-info .description, .head-box-content .news-top .box-info .time {display: none}
+    .head-box-content .list-items li time { display: none;}
+}
+@media (min-width: 480px) and (max-width: 767px) {
+
+}
+@media (max-width: 479px) {
+    /*NEWS*/
+    .block-title .sub-title-link { width: 100%;}
+    .block-title .sub-title-link li a { padding: 0 5px; font-size: 12px}
+    .news-wrap .hight-light { width: 100%;padding-bottom: 10px; border-bottom: 1px solid  #eee;margin-bottom: 15px;}
+    .news-wrap .hight-light .box-info .title a { font-size: 17px;}
+    .news-wrap .list-items { width: 100%;padding-left: 0;}
+    .news-wrap .list-items .item {margin-bottom: 10px;}
+    .activities-wrap .owl-controls { top: -50px; right: 15px;}
+    /*CUSTOMER*/
+    .customers-wrap .box-content { margin: 0 -10px;}
+    .customers-slider .item {margin: 0 10px;}
+}
+
+/*Iphone 6*/
+@media (min-width: 375px) and (max-width: 480px){
+
+}
+@media (min-width: 667px) and (max-width: 767px){   
+
+}
+
+@media (max-width: 320px) {
+        
+}
+
+
+

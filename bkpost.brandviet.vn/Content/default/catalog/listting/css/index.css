@@ -1,0 +1,58 @@
+﻿.title-search { line-height: 40px;margin-bottom: 10px;padding-left: 10px;background-color: #f4f4f4;border: 1px solid #fff;  }
+.title-search:last-child {background-color: transparent;padding: 4px;float: right;}
+.title-search p {color: #E25831;font-weight: bold;font-size: 13px;margin: 0;}
+.title-search p span { font-size: 12px;color: #333;text-transform: none;font-weight: normal;}
+
+/*Search, Tag*/
+.m-list-tag > ul {margin-right: -10px }
+.m-list-tag .box-product { border: 1px solid #ddd;
+background-color: #fff;
+margin-right: 10px;
+min-height: 337px;
+padding: 3px;
+border-radius: 3px;
+padding-bottom: 0;}
+.m-list-tag ul li { display: inline-block;margin-bottom: 10px;}
+.m-list-tag ul li a.link-img {height: 200px;
+text-align: center;
+display: block;
+vertical-align: middle;
+margin-bottom: 5px;
+padding: 5px;}
+.m-list-tag ul li:hover a.link-img { opacity: .6; transition: opacity 0.2s linear}
+.m-list-tag ul li a.link-img img { max-width: 100%;max-height: 190px}
+.m-list-tag ul li .price-box { padding: 5px;
+border-bottom: 1px solid #e2e2e2;
+margin-bottom: 3px;}
+.m-list-tag ul li .price-box .current {color: #E25831; font-weight: bold;font-size: 13px;}
+.m-list-tag ul li .price-box .original {float: right;display: block;font-size: 12px;color: #999;text-decoration: line-through;}
+.m-list-tag ul li .link-title {color: #333;
+display: block;
+overflow: hidden;
+line-height: 16px;
+max-height: 32px;
+padding: 5px 0;
+font-size: 16px;
+font-weight: bold;
+margin: 0 5px 0 5px;
+font-family: roboto-bold;}
+.m-list-tag ul li .ratings { padding-left: 5px;}
+.m-list-tag ul li .hotdeal-buyer { background-color: #f4f4f4;
+font-size: 12px;
+height: 35px;
+line-height: 35px;
+padding: 0 10px;
+width: 235px;
+margin: 0 0 -3px -3px;
+/* margin-bottom: -3px; */
+/* float: left; */
+position: absolute;
+bottom: 4px;}
+.m-list-tag ul li .hotdeal-buyer b:hover .fa-eye, .m-list-tag ul li .hotdeal-buyer b:hover .fa-tag {color: #E25831}
+.title-search .pull-right{height: 40px; margin-right:10px;display: table;}
+
+/*Paging*/
+.title-search ul.pagination { margin: 0;vertical-align: middle;display: table-cell; }
+.title-search ul.pagination li a {background-color: #B3B3B3;border: none;color: #fff;font-size: 12px;font-weight: bold;
+                                  height: 25px;line-height: 25px;margin-right: 5px;padding: 0;text-align: center;width: 25px !important;}
+.title-search ul.pagination li.active a, .title-search ul.pagination li:hover a { background-color: #E25831; }

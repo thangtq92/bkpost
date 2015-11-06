@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Hãng sản xuất: " + ViewBag.productManufacturerName;
+}
+@model PagedList.IPagedList<NB_Commerce.Model.Models.ProductManufacturerMapping>
+@using NB_Commerce.Models
+@using PagedList.Mvc;
+@Styles.Render("~/bundles/content/default/catalog/listting/css")
+@Html.Action("Breadcrumb", "Widgets", new {breadcrumbs = new List<BreadcrumbModel> {new BreadcrumbModel {Link = "#", Title = ViewBag.productManufacturerName}}, homeIncluded = true, headingIncluded = true, area = ""})
+<div class="row title-search">
+    <p class="pull-left">
+       <span>Hãng sản xuất </span> @ViewBag.productManufacturerName
+      @if(ViewBag.totalCount > 0) {
+            <span>có <b>@ViewBag.totalCount</b> sản phẩm </span>
+            <span style="font-size: 11px;">(Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) của @Model.PageCount) </span>
+        }
+    </p>
+    <div class="pull-right">
+        <div style="vertical-align: middle; display: table-cell;">
+            @using (Html.BeginForm("Page", "Home", FormMethod.Get)) {
+                <span>Xếp theo:</span>
+                    @Html.DropDownList("sortorder", new SelectList(
+                        new Dictionary<string, string> { 
+                        { "new", "Hàng mới nhập" }, 
+                        { "name", "Tên: A đến Z" }, 
+                        { "name_desc", "Tên: Z đến A" },
+                        { "price", "Giá: Từ thấp đến cao" },
+                        { "price_desc", "Giá giảm: Từ cao về thấp" }
+                        },
+                        "Key", "Value", ViewBag.sortorder), new { id = "sortorder", @class= "first" });
+                
+                    <span>Hiển thị:</span>
+                    @Html.DropDownList("pagesize", new SelectList(
+                        new Dictionary<int, string> { { 8, "08" }, { 12, "12" }, { 16, "16" }, { 32, "32" } },
+                        "Key", "Value", ViewBag.pageSize), new { id = "pagesize" });
+             }
+        </div>
+    </div>
+</div>
+
+@*Search, Tag ...*@
+<div class="row m-list-tag">
+     @if(Model.Count < 1) {
+            <div style="padding: 32px;background: #fff">
+               <b>Không tìm thấy kết quả tương ứng</b>
+            </div>
+        }
+        else {
+            <ul class="container-fluid">
+                @foreach (var item in Model) {
+                    <li class="col-xs-3">
+                        <div class="box-product">
+                            @if(item.Product.SpecialPriceByPercent  > 0) {
+                                <div data-bind="if: Discount">
+                                    <span class="bg-sale"> <b>-<span>@item.Product.SpecialPriceByPercent%</span></b></span>
+                                </div>
+                            }
+                            <a class="link-img" href="@Utils.GetUrlProduct(item.Product.Id)" title="@item.Product.Name">
+                                <img src="@Utils.GetImage(item.Product.Picture.Url, 192)" alt="@item.Product.Picture.Title">
+                            </a>
+                        
+                            @if (item.Product.SpecialPrice > 0)
+                            {
+                                <div class="price-box">
+                                    <span class="current">
+                                          @Utils.FormatCurrency(item.Product.SpecialPrice)
+                                    </span>
+                                    <span class="original"> @Utils.FormatCurrency(item.Product.Price) </span>
+                                </div>
+                            }else {
+                                <div class="price-box">
+                                    <span class="current">
+                                          @Utils.FormatCurrency(item.Product.Price)
+                                    </span>
+                                </div>
+                            }
+
+                            <a class="link-title" href="@Utils.GetUrlProduct(item.Product.Id)" title="@item.Product.Name">@item.Product.Name</a>
+                            @if (item.Product.ApprovedTotalReviews > -1)
+                            {
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        <div class="rating" style="width: @item.Product.ApprovedRatingSum%;"></div>
+                                    </div>
+                                    <div style="padding-top: 2px; font-size: 12px">
+                                        (<span> @item.Product.ApprovedTotalReviews </span> nhận xét)
+                                    </div>
+                                </div><!--Rating-->
+                            }
+                            <div class="hotdeal-buyer">
+                                <b ><i class="fa fa-eye"></i> @item.Product.Viewed</b> <span> đã xem</span>
+                                <div class="pull-right">
+                                    <b ><i class="fa fa-tag"></i> @item.Product.OrderItems.Count</b> <span> đã mua</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+     }
+</div>
+<div class="row title-search" style="text-align: center;">
+    
+    @Html.PagedListPager(Model, page => Url.Action("Page","Home" , new { sortorder = ViewBag.sortOrder, pagesize = ViewBag.pageSize, page  }))
+</div>
+
+@section scripts {
+
+    <script>
+        $("#pagesize, #sortorder").change(function (event) {
+            var form = $(event.target).parents("form");
+            HvHelpers.loading.show("force");
+            form.submit();
+        });
+        $(document).ready(function () {
+            $('html, body').animate({ scrollTop: 472 }, 700); 
+        });
+    </script>
+}
+

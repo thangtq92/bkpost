@@ -1,0 +1,13 @@
+﻿
+@using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @name = "search-form", @class = "form-inline" }))
+{
+    <div class="input-group well">
+        <input type="text" name="key" data-scope="@ViewBag.scope" placeholder="@Resources.Resource.Search_PlaceHolder" required value="@ViewBag.keyword" class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-main-color" type="submit">
+                <i class="fa fa-search"></i> @Resources.Resource.Button_Search_Name
+            </button> </span>
+    </div>
+    <input type="hidden" value="@ViewBag.scope" name="scope"/>
+}
+ @Html.Action("Trends", "Search", new {area = "", take = 10})

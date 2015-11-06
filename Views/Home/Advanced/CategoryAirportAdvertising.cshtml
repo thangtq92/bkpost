@@ -1,0 +1,27 @@
+﻿@model List<NB_Commerce.Model.Models.Category>
+@if(Model != null) {
+    <!-- start: service -->
+        <ul class="widgets-container">
+            @foreach (var item in Model)
+            {
+                <li class="items">
+                    <figure class="box-images">
+                        <a href="@Utils.GetUrlCategory(item.Id)"><img src="@Utils.GetImage(item.Avatar, 270,162)" alt="@item.Name"></a>
+                        <!-- start: MORE -->
+                        <div class="more">
+                            <a href="@Utils.GetUrlCategory(item.Id)" title="Chi tiết dịch vụ"><i class="fa fa-paper-plane"></i></a>
+                        </div>
+                        <!-- end: MORE -->
+                    </figure>
+                    <div class="sub-info">
+                        <h2 class="title"><a href="@Utils.GetUrlCategory(item.Id)">@item.Name</a></h2>
+                        @if (item.Description != null)
+                        {
+                            <div class="description except-3">@Html.Raw(item.Description)</div>
+                        }
+                    </div>
+                </li>
+            }
+        </ul>
+   <!-- end: service -->
+}

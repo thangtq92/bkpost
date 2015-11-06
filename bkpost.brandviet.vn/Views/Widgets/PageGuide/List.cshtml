@@ -1,0 +1,32 @@
+﻿<!-- this set of pageguide steps will be displayed by default. -->
+<ul id="tlyPageGuide" data-tourtitle="check out these elements">
+    @foreach (var menu in (List<string[]>) ViewBag.listMenu)
+    {
+        <li class="tlypageguide_bottom" data-tourtarget=".@menu[0]">
+            <div>@menu[1] <a href="@menu[2]" target="_blank"> -> Modify </a></div>
+        </li>
+    }
+    @foreach (var menu in (List<string[]>) ViewBag.listAlbum)
+    {
+        <li class="tlypageguide_bottom" data-tourtarget=".@menu[0]">
+            <div>@menu[1] <a href="@menu[2]" target="_blank"> -> Modify </a></div>
+        </li>
+    }
+
+    @foreach (var menu in (List<string[]>) ViewBag.listStaticBlock)
+    {
+        <li class="tlypageguide_bottom" data-tourtarget="#@menu[0]">
+            <div>@menu[1] <a href="@menu[2]" target="_blank"> -> Modify </a></div>
+        </li>
+    }
+    <li>
+        <a href="#" target="_blank"> Edit content page </a>
+    </li>
+   
+</ul>
+<div class="tlyPageGuideWelcome">
+    <p>Welcome to my new page! pageguide is here to help you learn more.</p>
+    <button class="tlypageguide_start">Let's go</button>
+    <button class="tlypageguide_ignore">Not now</button>
+    <button class="tlypageguide_dismiss">Got it, thanks</button>
+</div>

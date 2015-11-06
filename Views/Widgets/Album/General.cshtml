@@ -1,0 +1,114 @@
+﻿@using NB_Commerce
+@using NB_Commerce.Helpers
+@using NB_Commerce.Model.Models
+@model NB_Commerce.Model.Models.Album
+
+<div class="@Model.Identifier">
+    @if (Model.Id > 0)
+    {
+        string[] size = Model.PictureSize.Split('x');
+        int width = Int16.Parse(size[0]);
+        int heigth = Int16.Parse(size[1]);
+        string widthPx = width + "px";
+        string heightPx = heigth + "px"; 
+        
+        if (Model.AlbumPictureMappings != null)
+        {
+            
+            if (Model.AlbumDisplay.Identifier == "carousel-slider")
+            {
+                <div id="carousel-slider-@(Model.Identifier + "-" + ViewBag.Instance)" class="owl-carousel">
+                    <!-- Indicators -->
+                    @foreach (AlbumPictureMapping i in Model.AlbumPictureMappings.OrderBy(e => e.DisplayOrder))
+                    {
+                        <div class="item-slider">
+                            <img src="@Utils.GetImage(i.Picture.Url, width, heigth, 80L)" alt="@i.Picture.Title">
+                            <!-- start: item caption  -->
+                            <div class="item-caption">
+                                <div class="container">
+                                    <!-- start: LeftToRight  -->
+                                    @Html.Raw(i.Caption)
+                                    <!-- end: LeftToRight  -->
+                                </div>
+                            </div>
+                            <!-- end: item caption  -->
+                        </div>
+                    }
+                </div>
+
+            }
+            else if (Model.AlbumDisplay.Identifier == "sequence-slider")
+            {
+                <!-- start: main-slider -->
+                <div class="owl-carousel main-slider" id="main-slider">
+                    @foreach (AlbumPictureMapping i in Model.AlbumPictureMappings.OrderBy(e => e.DisplayOrder))
+                    {
+                        <div class="item"><img alt="Slider home" src="@Utils.GetImage(i.Picture.Url, width, heigth, 80L)" /></div>
+                    }
+                </div>
+                <!-- end: main-slider -->
+            }
+            
+        }
+        using (Html.BeginScripts())
+        {
+           if (Model.AlbumDisplay.Identifier == "carousel-slider")
+            {
+               <script>
+                   $("<link/>", {
+                       rel: "stylesheet",
+                       type: "text/css",
+                       href: "/Content/plugins/owlcarousel/css/owl.carousel.css"
+                   }).appendTo("head");
+               </script>
+            }
+            else if (Model.AlbumDisplay.Identifier == "sequence-slider")
+            {
+                <script>
+                    $("<link/>", {
+                        rel: "stylesheet",
+                        type: "text/css",
+                        href: "/Content/plugins/sequence-slider/css/sequence-looptheme.css"
+                    }).appendTo("head");
+                </script>
+                <script>
+                    $("<link/>", {
+                        rel: "stylesheet",
+                        type: "text/css",
+                        href: "/Content/plugins/sequence-slider/css/style.css"
+                    }).appendTo("head");
+               </script>
+            }
+            <script>
+
+                window.instance = '@(Model.Identifier + "-" + ViewBag.Instance)';
+                window[instance] = {};
+                var configDecode = @Html.Raw(ViewBag.Configure)
+                window[instance].customConfig = configDecode;
+                window[instance].customConfig.SizeW = '@width';
+                window[instance].customConfig.SizeWr = '@(heigth * 2)';
+
+                window[instance].AppliedTo = '@(Model.AlbumDisplay.Identifier + "-" + Model.Identifier + "-" + ViewBag.Instance)';
+
+            </script>
+
+             if (Model.AlbumDisplay.Identifier == "carousel-slider") {
+                    <script>
+                        HvHelpers.loadJs('content/plugins/owlcarousel/js/owl.carousel.js', window.lightSliderObj, function () {
+                            // MAIN SLIDER
+                            $("#" + window[instance].AppliedTo).owlCarousel(window[instance].customConfig);
+                            
+                        });
+                    </script>
+               }else if (Model.AlbumDisplay.Identifier == "sequence-slider")
+              {
+                    <script>
+                        HvHelpers.loadJs('content/plugins/sequence-slider/js/jquery.sequence.js', window.sequenceObj, function () {
+                            // Sequence Slider
+                            $("." + window[instance].AppliedTo).sequence( window[instance].customConfig);
+ 
+                        });
+                    </script>
+            }
+        }
+    }</div>

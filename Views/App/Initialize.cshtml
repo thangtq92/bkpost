@@ -1,0 +1,86 @@
+﻿@using NB_Commerce.Repositories
+@{
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    ViewBag.Title = "Initialize";
+}
+<style>
+    .main-page { padding: 12px; }
+
+    .main-page h3 {
+        border-bottom: 1px solid #E8E6E6;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .main-page label { width: 120px; }
+
+    .main-page .submit {
+        font-weight: 700;
+        height: 28px;
+        width: 200px;
+    }
+
+    .main-page code { margin-left: 72px; }
+
+    .main-page fieldset { padding: 0px 12px!important; }
+
+    .main-page fieldset legend { color: blue; }
+        .main-page .span6 {
+              float: left;
+              width: 60%;
+        }
+        .main-page .span4 {
+              float: left;
+              width: 40%;
+        }
+</style>
+
+<h3><i class="fa fa-cog"></i> Configs for website: @AppConfigs.Host</h3>
+<br/>
+<br/>
+<div class="row">
+    <div class="span6">
+        @using (Html.BeginForm("Initialize", "App", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            <input id="token" name="token" type="hidden"  value="@ViewBag.token"/>
+            if (!string.IsNullOrEmpty(ViewBag.Result))
+            {
+                <mark>Notify: @ViewBag.Result</mark>
+                <hr/>
+            }
+            <fieldset>
+                <legend><i class="fa fa-database"></i> Connection Credits:</legend>
+                <label for="ConnectionName"> Name:
+                    <input id="ConnectionName" name="ConnectionName"  value="@ViewBag.ConnectionName"/>
+                </label>
+                <br/>
+                <label for="ConnectionValue"> ConnectionString:
+                    <textarea id="ConnectionValue" name="ConnectionValue" style="width: 800px;">@ViewBag.ConnectionValue</textarea>
+                </label>
+            </fieldset>
+
+            <hr/>
+            <fieldset>
+                <legend><i class="fa fa-h-square"></i> Host Infor:</legend>
+                <label for="HostName"> Name:
+                    <input id="HostName" name="HostName" value="@ViewBag.HostName"/> 
+                </label>
+                <code>* for automatic detect hosting & run multile site on same pool!</code>
+            </fieldset>
+
+            <hr/>
+            <p class="text-right">
+                <input class="submit" type="submit" value="Configs">
+            </p>
+        }
+    
+    </div>
+    <div class="span4">
+        <fieldset>
+                <legend>Result:</legend>
+                <iframe style="border: none; height: 342px;" src="@Url.Action("Initialize","App", new { ping = true, ViewBag.token })">
+             
+                </iframe>
+        </fieldset>
+    </div>
+</div>

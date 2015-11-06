@@ -1,0 +1,84 @@
+/*PAGE RESPONSIVE*/
+/* ###--------------#  File share responsive  #--------------###*/
+/* Fixed Mobile*/
+@media (max-width: 1280px) {
+
+}
+
+@media(max-width:992px){
+    /*category-news-wrap*/
+    .category-news-wrap {margin-bottom: 20px;}
+    /*main-list-items*/
+    .main-list-items .items-inner .title-category .time {display: none}
+}
+@media(max-width: 1280px){
+
+}
+/*Table ipad*/
+@media (min-width: 992px) and (max-width: 1280px) {
+    /*inner-box-sidebar*/
+    .inner-box-sidebar .box-info .time { display: none;}
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    /*category-news-wrap*/
+    .category-news-wrap .hight-light, .category-news-wrap .list-items {width: 100%;}
+    /*list-tags*/
+    .list-tags ul li a { padding: 5px;}
+    /*inner-box-sidebar*/
+    .inner-box-sidebar .box-info .time { display: none;}
+}
+@media (max-width: 780px){
+    .category-news-wrap {margin-bottom: 10px;}
+}
+@media (max-width: 767px){
+    .pagination {margin: 10px 0;}
+    .main-page-wrap {margin-bottom: 20px;}
+    .layout-page-wrap  { margin-top: 0;}
+    /*left-page-layout*/
+    .left-page-layout { margin: 20px 0;}
+    /*category-news-wrap*/
+    .category-news-wrap { margin-bottom: 15px;}
+    .category-news-wrap .hight-light .box-images { width: 50%; }
+    .category-news-wrap .hight-light, .category-news-wrap .list-items { width: 100%;}
+    .category-news-wrap .list-items  { padding-left: 13px;margin-top: 15px;}
+    .category-news-wrap .list-items .item .title a { font-size: 15px;}
+    .category-news-wrap .hight-light .title a, .inner-box-sidebar .box-info .title a, .list-tags ul li a { font-size: 14px;}
+    .main-list-items .items-inner {margin-bottom: 10px;padding-bottom: 10px;}
+    .main-list-items .items-inner:last-child { margin-bottom: 0;padding-bottom: 0; border: 0}
+}
+/*Mobile Iphone6*/
+@media (min-width: 568px) and (max-width: 767px) {
+	
+}
+/*Mobile Iphone5*/
+@media (min-width: 568px) and (max-width: 666px) {
+	
+}
+@media (max-width: 567px) {
+}
+@media (min-width: 480px) and (max-width: 767px) {
+     /*category-news-wrap*/
+    .category-news-wrap .hight-light .box-images {width: 30%;}
+}
+@media (max-width: 479px) {
+    .main-list-items .items-inner .title-category {display: none;}
+    
+    .main-list-items .items-inner .box-info .title {margin: 0;} 
+    .items-inner .box-images {width: 40%;}
+
+}
+
+/*Iphone 6*/
+@media (min-width: 375px) and (max-width: 480px){
+
+}
+@media (min-width: 667px) and (max-width: 767px){   
+
+}
+
+@media (max-width: 320px) {
+        
+}
+
+
+

@@ -1,0 +1,74 @@
+﻿@model NB_Commerce.Model.Models.Page
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Model.MetaTitle ?? Model.Name;
+    ViewBag.MetaKeywords = Model.MetaKeywords;
+    ViewBag.MetaDescription = Model.MetaDescription;
+}
+<!-- start: BANNER-TOP -->
+<div class="banner-top-page">
+	@Html.Action("Caller", "StaticBlock", new { identifier = "banner-top-page", area = "" })
+</div>
+<section class="wrapper">
+    <div class="container">
+        <!--start: box-breadcrumb-->
+                @Html.Action("Breadcrumb", "Widgets", new { breadcrumbs = new List<BreadcrumbModel> { new BreadcrumbModel { Link = "#", Title = Model.Name } }, homeIncluded = true, headingIncluded = true ,  area = "" })
+        <!--end: box-breadcrumb-->
+        <div class="row">
+            <!-- start: PAGE CONTENT LEFT -->
+            <div class="col-sm-8 page-content-left">
+                    <div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">1/ Báo giá quảng cáo</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">2/ Tất cả vị trí quảng cáo tại sân bay</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">3/ Vị trí quảng cáo tại Nội Bài</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">4/ Vị trí quảng cáo tại Tân Sơn Nhất</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">5/ Vị trí quảng cáo tại Đà Nẵng</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">6/ Vị trí quảng cáo tại Phú Quốc</div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);"> </div>
+
+<div style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">7/ Vị trí quảng cáo tại Cam Ranh</div>
+  
+            </div>
+            <!-- end: PAGE CONTENT LEFT -->
+            <!-- start: PAGE CONTENT RIGHT -->
+            <div class="col-sm-4 page-content-right">
+                @Html.Action("Caller", "StaticBlock", new { identifier = "banner-right-page", area = "" })
+                <!-- start: side-box-wrapper box-service-us -->
+                <div class="side-box-wrapper box-service-us">
+                    <div class="box-title">
+                        <h3>Dịch vụ của chúng tôi</h3>
+                    </div>
+                     @Html.Action("Caller", "StaticBlock", new { identifier = "pageright-service-focus", area = "" })
+                </div>
+                <!-- end: side-box-wrapper box-service-us -->
+                
+                <!-- start: side-box-wrapper -->
+                <div class="side-box-wrapper">
+                    <div class="box-title">
+                        <h3>Bài viết mới nhất</h3>
+                    </div>
+                    @Html.Action("LatestPosts", "Widgets", new { blogCategoryId = -1, take = 3, area = "" })
+                </div>
+                <!-- end: side-box-wrapper -->
+            </div>
+        </div>
+    </div>
+</section>
+@section styles {
+    @Styles.Render("~/bundles/content/default/page/css")
+}

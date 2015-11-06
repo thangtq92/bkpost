@@ -1,0 +1,74 @@
+﻿@using NB_Commerce.Helpers
+@using NB_Commerce.Repositories
+<!DOCTYPE html>
+<html lang="@SessionManager.UniqueSeoCode">
+    <head>
+        <title>..:: @ViewBag.Title ::..</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        @{
+            var gt = AppConfigs.Get("GoogleWebmasterToolCode");
+            if (gt != null)
+            {
+                @Html.Raw(gt)
+            }   
+         }
+        <meta name="viewport" content="width=device-width,  maximum-scale=1.0, user-scalable=yes" />
+        <meta name="keywords" content="@ViewBag.MetaKeywords" />
+        <meta name="description" content="@ViewBag.MetaDescription" />
+        <link href="@AppConfigs.Get("Favicon")" rel="shortcut icon" type="image/x-icon" />
+        <link rel="canonical" href="@HttpContext.Current.Request.Url.AbsolutePath" />
+        @{
+            foreach (var ura in SessionManager.Alternate)
+            {
+                @Html.Raw("<link rel='alternate' type='text/html' hreflang='" + ura.Hreflang + "' href='" + ura.Href + "' title='" + ura.Title + "' />")
+            }
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.og_type))
+        {
+            <meta property="og:type" content="@ViewBag.og_type" />
+            <meta property="og:url" content="@ViewData["og:url"]" />
+            <meta property="og:image" itemprop="thumbnailUrl" content="@ViewData["og:image"]" />
+            <meta property="og:title" itemprop="headline" content="@ViewData["og:title"]" />
+            <meta property="og:description" content="@ViewData["og:description"]" />
+            <meta property="article:publisher" content="@ViewData["article:publisher"]" />
+            <meta property="article:published_time" itemprop="datePublished" content="@ViewData["article:published_time"]" />
+        }
+        
+    </head>
+    <body>
+            <!-- start: MAIN CONTAINER -->
+            <section class="main-page">
+                @RenderBody()
+            </section>
+            <!-- end: MAIN CONTAINER -->
+      <!-- /.sb-slidebar .sb-right -->
+	    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700&subset=vietnamese' rel='stylesheet' property="stylesheet" type='text/css'>
+        @Styles.RenderFormat(BundlesFormats.ALL,"~/bundles/css/core") 
+        @Styles.RenderFormat(BundlesFormats.ALL,"~/bundles/css/shared")
+        @RenderSection("styles", required: false)
+        <!-- start: MAIN JAVASCRIPTS -->
+        @Scripts.Render("~/bundles/js/core")
+        @RenderSection("scriptsdefault", required: false)
+        @RenderSection("scripts", required: false)
+        @Html.PageScripts()
+        @{
+            string ga = AppConfigs.Get("GoogleAnalyticCode");
+            if (ga != null)
+            {
+                @Html.Raw(ga)
+            }
+
+            string zm = AppConfigs.Get("ShowZopim");
+            if (zm == "True")
+            {
+                @Html.Raw(AppConfigs.Get("ZopimCode"))
+            }
+        }
+        <script>
+            jQuery(document).ready(function () {
+                AppConfigs.isAuthenticated = '@Request.IsAuthenticated';
+            });
+        </script>
+   </body>
+
+</html>

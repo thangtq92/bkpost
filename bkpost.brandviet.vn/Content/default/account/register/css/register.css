@@ -1,0 +1,55 @@
+﻿/* Module Register*/
+    .m-content {
+       padding-top: 26px;
+    }
+    .register {
+        background: white;
+        margin: 0px 0px 24px 0px;
+        padding: 0px 12px 12px 12px;
+    }
+
+    .register-directly {
+        
+    }
+       
+    input.last-name {
+       width: 100px
+    }
+
+    .register-directly select {
+      color: gray;
+    }
+
+    .register-directly select option:nth-child(1) {
+        color: #999; 
+    }
+
+    .register-via {
+      
+    }
+
+    .register-via  .facebook {
+        background-position: 0 -225px;
+        margin-right: 12px;
+    }
+
+    .register-via  a {
+        background-image: url(img/beacon_sprite_other.png);
+        background-repeat: no-repeat;
+        float: left;
+        font-size: 0;
+        height: 28px;
+        width: 104px;
+    }
+
+    .register-via  .google { background-position: 0 -255px; }
+
+    .register-via  a {
+        background-image: url(img/beacon_sprite_other.png);
+        background-repeat: no-repeat;
+        float: left;
+        font-size: 0;
+        height: 28px;
+        width: 104px;
+    }
+
