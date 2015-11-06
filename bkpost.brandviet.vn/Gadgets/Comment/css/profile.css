@@ -1,9 +1,0 @@
-.box-form{background:#fff;position:relative;width:100%;/* margin-left: 4% */}
-.box-form #box-form-inner{padding:16px 16px 4px 18px}
-.box-form #box-form-inner .box-right{float:right;width:100%}
-.box-txt{margin:0 0 3px;float: left;width: 100%;/* padding: 10px; */}
-.box-txt .txt-box{background:#fff;border: 1px solid #dfdfdf;padding: 5px;width: 100%;float: left;box-sizing: border-box;}
-.box-desc{color:#9f224e;display:inline-block;font:400 11px arial;margin:0 0 10px;overflow:hidden}
-.box-btt{display:block;margin:0;overflow:hidden;text-align:right;width: 100%;}
-.btt-complete{background:#453C36;border:none;color:#fffefe;cursor:pointer;padding:5px 10px;text-align:center;font-weight: 700;  font-size: 13px;}
-.btt-complete:hover {background-color: #8CA833}
